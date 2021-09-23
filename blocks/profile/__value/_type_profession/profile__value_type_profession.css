@@ -1,0 +1,10 @@
+.profile__value_type_profession {
+    color: #FFFFFF;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 1.22;
+    margin: 0px;
+    width: 100%;
+    grid-column: 1/3;
+    grid-row: 2;
+}

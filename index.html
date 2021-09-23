@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Around the U.S.</title>
+    <link rel="stylesheet" href="./pages/index.css" />
+</head>
+
+<body>
+    <div class="page">
+        <div class="container">
+            <header class="header">
+                <img class="header__logo" src="./images/header.png" alt="Title: Around the U.S." />
+            </header>
+            <main class="content">
+                <div class="profile">
+                    <img class="profile__avatar" src="./images/avatar.png" alt="Profile Picture" />
+                    <div class="profile__info">
+                        <h2 class="profile__value profile__value_type_name">Jacques Cousteau</h2>
+                        <p class="profile__value profile__value_type_profession">Explorer</p>
+                        <button class="profile__edit-button remove-default-style"><img src="images/edit-button.png" alt="Edit Button" /></button>
+                    </div>
+                    <button class="profile__add-button remove-default-style"><img  src="./images/add-button.png" alt="Add Button" /></button>
+                </div>
+
+                <ul class="cards">
+                    <li class="card">
+                        <img class="card__picture" src="./images/yosemite.png" alt="A picture of the place" />
+                        <div class="card__name-heart">
+                            <p class="card__name">Yosemite Valley</p>
+                            <img class="card__heart" src="./images/heart.png" alt="A Heart" />
+                        </div>
+                    </li>
+                    <li class="card">
+                        <img class="card__picture" src="./images/lake.png" alt="A picture of the place" />
+                        <div class="card__name-heart">
+                            <p class="card__name">Lake Louise</p>
+                            <img class="card__heart" src="./images/heart.png" alt="A Heart" />
+                        </div>
+                    </li>
+                    <li class="card">
+                        <img class="card__picture" src="./images/mountains.png" alt="A picture of the place" />
+                        <div class="card__name-heart">
+                            <p class="card__name">Bald Mountains</p>
+                            <img class="card__heart" src="./images/heart.png" alt="A Heart" />
+                        </div>
+                    </li>
+                    <li class="card">
+                        <img class="card__picture" src="./images/latemar.png" alt="A picture of the place" />
+                        <div class="card__name-heart">
+                            <p class="card__name">Latemar</p>
+                            <img class="card__heart" src="./images/heart.png" alt="A Heart" />
+                        </div>
+                    </li>
+                    <li class="card">
+                        <img class="card__picture" src="./images/vanoise.png" alt="A picture of the place" />
+                        <div class="card__name-heart">
+                            <p class="card__name">Vanoise National Park</p>
+                            <img class="card__heart" src="./images/heart.png" alt="A Heart" />
+                        </div>
+                    </li>
+                    <li class="card">
+                        <img class="card__picture" src="./images/lago.png" alt="A picture of the place" />
+                        <div class="card__name-heart">
+                            <p class="card__name">Lago di Braies</p>
+                            <img class="card__heart" src="./images/heart.png" alt="A Heart" />
+                        </div>
+                    </li>
+                </ul>
+            </main>
+
+            <footer class="footer">&copy; 2021 Yakov Bilbil</footer>
+        </div>
+        <div class="popup">
+
+            <div class="popup__form">
+                <form class="form-to-submit">
+
+                    <h2 class="popup__form-title">Edit profile</h2>
+
+                    <input type="text" name="full-name" placeholder="Name" class="popup__form-input popup__form-input_type_name" required />
+
+                    <input type="text" name="profession" placeholder="About me" class="popup__form-input popup__form-input_type_profession" required />
+
+                    <button type="button" class="popup__form-save-button">Save</button>
+
+                    <button type="button" class="popup__form-close-button remove-default-style">
+                      <img src="./images/close-icon.png" alt="Close Icon" />
+                    </button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="./pages/script.js"></script>
+</body>
+
+</html>
+
+<!--
+To do:
+
+no scrollbars
+
+to build for 320px
+
+js
+
+-->

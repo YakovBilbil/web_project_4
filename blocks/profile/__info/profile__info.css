@@ -1,0 +1,11 @@
+.profile__info {
+    height: 77px;
+    display: grid;
+    grid-template-columns: 373px 24px;
+    grid-template-rows: 39px 22px;
+    gap: 16px 18px;
+    margin-right: 165px;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}

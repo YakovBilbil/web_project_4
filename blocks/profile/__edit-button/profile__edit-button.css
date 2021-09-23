@@ -1,0 +1,13 @@
+.profile__edit-button {
+    max-height: 24px;
+    grid-column: 2;
+    grid-row: 1;
+    -webkit-transition: opacity 0.2s linear 0.2s;
+    -o-transition: opacity 0.2s linear 0.2s;
+    transition: opacity 0.2s linear 0.2s;
+}
+
+.profile__edit-button:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}

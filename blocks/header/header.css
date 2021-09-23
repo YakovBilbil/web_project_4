@@ -1,0 +1,16 @@
+.header {
+    height: 74px;
+    width: 100%;
+    max-width: 880px;
+    margin: 45px 200px 36.25px;
+    border-bottom: 1px solid #545454;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-item-align: center;
+    align-self: center;
+}
