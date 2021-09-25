@@ -9,3 +9,20 @@
     -ms-flex-pack: center;
     justify-content: center;
 }
+
+@media screen and (max-width: 900px) {
+    .profile__info {
+        grid-template-columns: 310px 12px;
+        margin-right: 0px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .profile__info {
+        width: 100%;
+        grid: none;
+        height: 136px;
+        margin: auto;
+        gap: 0px;
+    }
+}

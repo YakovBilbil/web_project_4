@@ -7,3 +7,9 @@
     display: none;
     visibility: hidden;
 }
+
+@media screen and (max-width: 550px) {
+    .popup__form-input {
+        width: 282px;
+    }
+}

@@ -9,3 +9,9 @@
     margin-left: 36px;
     outline: none;
 }
+
+@media screen and (max-width: 550px) {
+    .popup__form-input {
+        width: 238px;
+    }
+}

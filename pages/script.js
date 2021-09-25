@@ -18,6 +18,9 @@ let popupInputProfession = popup.querySelector(".popup__form-input_type_professi
 
 let formToSubmit = document.querySelector(".form-to-submit");
 
+let heart = document.querySelectorAll(".card__heart");
+
+
 
 
 
@@ -44,6 +47,13 @@ function handleFormSubmit(event) {
     event.preventDefault();
 }
 
+function like(event) {
+    event.target.classList.add("card__heart_black");
+}
+
+function unlike(event) {
+    event.target.classList.remove("card__heart_black");
+}
 
 
 
@@ -55,4 +65,27 @@ closeButton.addEventListener("click", closePopup);
 
 saveButton.addEventListener("click", save);
 
-formToSubmit.addEventListener('submit', handleFormSubmit);
+formToSubmit.addEventListener("submit", handleFormSubmit);
+
+
+
+for (let i = 0; i < heart.length; i++) {
+    if (heart[i].classList.contains("card__heart_black")) {
+        heart[i].addEventListener('click', unlike);
+    } else {
+        heart[i].addEventListener('click', like);
+    }
+}
+
+
+//for (let i = 0; i < heart.length; i++) {
+//   if (heart[i].classList.contains("card__heart_black")) {
+//      heart[i].addEventListener('click', (event) => {
+//          event.target.classList.remove("card__heart_black");
+//      });
+//  } else {
+//    heart[i].addEventListener('click', (event) => {
+//         event.target.classList.add("card__heart_black");
+//     });
+// }
+//}

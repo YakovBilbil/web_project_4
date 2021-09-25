@@ -8,3 +8,16 @@
     grid-column: 1/3;
     grid-row: 2;
 }
+
+@media screen and (max-width: 900px) {
+    .profile__value_type_profession {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .profile__value_type_profession {
+        margin-bottom: 36px;
+        text-align: center;
+    }
+}

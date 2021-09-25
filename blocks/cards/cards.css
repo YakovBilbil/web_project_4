@@ -13,9 +13,8 @@
     margin: 0px;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 900px) {
     .cards {
-        padding: 20px 19px;
-        /* grid-template-columns: 282px;*/
+        width: calc(100% - 38px);
     }
 }

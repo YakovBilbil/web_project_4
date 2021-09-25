@@ -7,3 +7,9 @@
     width: 358px;
     cursor: default;
 }
+
+@media screen and (max-width: 550px) {
+    .popup__form-title {
+        width: 238px;
+    }
+}

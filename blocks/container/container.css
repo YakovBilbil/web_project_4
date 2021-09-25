@@ -1,7 +1,7 @@
 .container {
     max-width: 1280px;
     width: 100%;
-    min-width: 320px;
+    min-width: 300px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -13,4 +13,16 @@
     -ms-flex-align: start;
     align-items: flex-start;
     background-color: #000000;
+}
+
+@media screen and (max-width:900px) {
+    .container {
+        max-width: 840px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .container {
+        max-width: 282px;
+    }
 }

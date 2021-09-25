@@ -2,12 +2,15 @@
     width: 21px;
     height: 19px;
     margin-right: 15px;
-    -webkit-transition: opacity 0.5s linear 0.2s;
-    -o-transition: opacity 0.5s linear 0.2s;
-    transition: opacity 0.5s linear 0.2s;
+    -webkit-transition: opacity 0.2s linear 0.2s;
+    -o-transition: opacity 0.2s linear 0.2s;
+    transition: opacity 0.2s linear 0.2s;
+    background-image: url("../../../images/white-heart.png");
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .card__heart:hover {
-    opacity: 0.8;
+    opacity: 0.6;
     cursor: pointer;
 }
