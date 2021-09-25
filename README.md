@@ -1,16 +1,39 @@
-# Project 4: Around The U.S.
+# Project 4: Around the U.S.
 
 ### Overview
 
-* Figma
-* Images
+- A description of the project and its functionality
+- A description of the technologies and techniques used
+- The link to GitHub Pages
 
-**Figma**
+**A description of the project and its functionality**
 
-* [Link to the project in Figma](https://www.figma.com/file/SurN1jaeEQIhuZEDMhmWWf/Sprint-4-Around-The-U.S.-desktop-mobile?node-id=0%3A1)
+"Around The U.S." — an interactive page where users can add, remove, or like photos.
 
-**Images**
+**A description of the technologies and techniques used**
 
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster. 
+- Figma
 
-Have fun with JavaScript!
+- BEM method
+
+- Flexbox
+
+- Grid
+
+- Media queries
+
+- Forms
+
+- JavaScript
+
+**The link to GitHub Pages**
+
+https://yakovbilbil.github.io/web_project_4/index.html
+
+### Social media:
+
+- <img class="footer__social-icons" src="./images/facebook_white.svg" alt="Facebook icon"> Facebook
+
+- <img class="footer__social-icons" src="./images/instagram_white.svg" alt="Instagram icon"> Instagram
+
+&copy; 2021 Yakov Bilbil
