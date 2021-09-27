@@ -13,71 +13,75 @@
     <div class="page">
         <div class="container">
             <header class="header">
-                <img class="header__logo" src="./images/header.png" alt="Title: Around the U.S." />
+                <img class="header__logo" src="./images/header.svg" alt="Title: Around the U.S." />
             </header>
             <main class="content">
-                <div class="profile">
+                <section class="profile">
                     <img class="profile__avatar" src="./images/avatar.png" alt="Profile Picture" />
                     <div class="profile__info">
-                        <h2 class="profile__value profile__value_type_name">Jacques Cousteau</h2>
-                        <p class="profile__value profile__value_type_profession">Explorer</p>
-                        <button class="profile__edit-button"><img src="images/edit-button.png" alt="Edit Button" /></button>
+                        <h1 class="profile__value_type_name">Jacques Cousteau</h1>
+                        <p class="profile__value_type_profession">Explorer</p>
+                        <button type="button" class="profile__edit-button" aria-label="Edit Profile"><img class="edit-button-image" src="images/edit-button.png" alt="Edit Button" /></button>
                     </div>
-                    <p class="profile__add-button">&#43;</p>
-                </div>
+                    <button type="button" class="profile__add-button">&#43;</button>
+                </section>
 
-                <ul class="cards">
-                    <li class="card">
-                        <img class="card__picture" src="./images/yosemite.png" alt="A picture of the place" />
-                        <div class="card__name-heart">
-                            <p class="card__name">Yosemite Valley</p>
-                            <div class="card__heart"></div>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <img class="card__picture" src="./images/lake.png" alt="A picture of the place" />
-                        <div class="card__name-heart">
-                            <p class="card__name">Lake Louise</p>
-                            <div class="card__heart"></div>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <img class="card__picture" src="./images/mountains.png" alt="A picture of the place" />
-                        <div class="card__name-heart">
-                            <p class="card__name">Bald Mountains</p>
-                            <div class="card__heart"></div>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <img class="card__picture" src="./images/latemar.png" alt="A picture of the place" />
-                        <div class="card__name-heart">
-                            <p class="card__name">Latemar</p>
-                            <div class="card__heart"></div>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <img class="card__picture" src="./images/vanoise.png" alt="A picture of the place" />
-                        <div class="card__name-heart">
-                            <p class="card__name">Vanoise National Park</p>
-                            <div class="card__heart"></div>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <img class="card__picture" src="./images/lago.png" alt="A picture of the place" />
-                        <div class="card__name-heart">
-                            <p class="card__name">Lago di Braies</p>
-                            <div class="card__heart"></div>
-                        </div>
-                    </li>
-                </ul>
+                <section class="cards">
+                    <ul class="cards__list">
+                        <li class="card">
+                            <img class="card__picture" src="./images/yosemite.png" alt="A picture of the place" />
+                            <div class="card__name-heart">
+                                <h2 class="card__name">Yosemite Valley</h2>
+                                <button type="button" class="card__heart"></button>
+                            </div>
+                        </li>
+                        <li class="card">
+                            <img class="card__picture" src="./images/lake.png" alt="A picture of the place" />
+                            <div class="card__name-heart">
+                                <h2 class="card__name">Lake Louise</h2>
+                                <button type="button" class="card__heart"></button>
+                            </div>
+                        </li>
+                        <li class="card">
+                            <img class="card__picture" src="./images/mountains.png" alt="A picture of the place" />
+                            <div class="card__name-heart">
+                                <h2 class="card__name">Bald Mountains</h2>
+                                <button type="button" class="card__heart"></button>
+                            </div>
+                        </li>
+                        <li class="card">
+                            <img class="card__picture" src="./images/latemar.png" alt="A picture of the place" />
+                            <div class="card__name-heart">
+                                <h2 class="card__name">Latemar</h2>
+                                <button type="button" class="card__heart"></button>
+                            </div>
+                        </li>
+                        <li class="card">
+                            <img class="card__picture" src="./images/vanoise.png" alt="A picture of the place" />
+                            <div class="card__name-heart">
+                                <h2 class="card__name">Vanoise National Park</h2>
+                                <button type="button" class="card__heart"></button>
+                            </div>
+                        </li>
+                        <li class="card">
+                            <img class="card__picture" src="./images/lago.png" alt="A picture of the place" />
+                            <div class="card__name-heart">
+                                <h2 class="card__name">Lago di Braies</h2>
+                                <button type="button" class="card__heart"></button>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
             </main>
 
-            <footer class="footer">&copy; 2021 Yakov Bilbil</footer>
+            <footer class="footer">
+                <p class="footer__title">&copy; 2021 Yakov Bilbil</p>
+            </footer>
         </div>
         <div class="popup">
 
             <div class="popup__form">
-                <form class="form-to-submit">
+                <form class="popup__form-submit" name="profileForm">
 
                     <h2 class="popup__form-title">Edit profile</h2>
 
@@ -85,10 +89,10 @@
 
                     <input type="text" name="profession" placeholder="About me" class="popup__form-input popup__form-input_type_profession" required />
 
-                    <button type="button" class="popup__form-save-button">Save</button>
+                    <button type="submit" class="popup__form-save-button">Save</button>
 
-                    <button type="button" class="popup__form-close-button">
-                      <img class="close-picture" src="./images/close-icon.png" alt="Close Icon" />
+                    <button type="button" class="popup__form-close-button" aria-label="Close">
+                      <img class="popup__close-icon" src="./images/close-icon.svg" alt="Close Icon" />
                     </button>
 
                 </form>

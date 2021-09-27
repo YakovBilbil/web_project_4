@@ -29,7 +29,7 @@
     .profile__edit-button {
         grid-column: 2;
         grid-row: 1;
-        margin-left: 15.25px;
-        margin-top: 23px;
+        margin-left: 10px;
+        margin-top: 28px;
     }
 }

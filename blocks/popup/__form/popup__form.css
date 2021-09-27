@@ -1,8 +1,7 @@
 .popup__form {
-    position: absolute;
+    position: relative;
     z-index: 2;
     max-width: 430px;
-    height: 330px;
     background-color: #ffffff;
     -webkit-box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
     box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.85);

@@ -1,7 +1,7 @@
 .popup__form-close-button {
     position: absolute;
-    top: -50px;
-    right: -50px;
+    top: -38px;
+    right: -38px;
     -webkit-transition: opacity 0.2s linear 0.2s;
     -o-transition: opacity 0.2s linear 0.2s;
     transition: opacity 0.2s linear 0.2s;
@@ -19,6 +19,7 @@
 
 @media screen and (max-width: 550px) {
     .popup__form-close-button {
-        right: 0px;
+        right: 5px;
+        top: -48px;
     }
 }

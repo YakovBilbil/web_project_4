@@ -26,12 +26,13 @@
 }
 
 .popup__form-save-button:hover {
-    opacity: 0.6;
+    opacity: 0.8;
     cursor: pointer;
 }
 
 @media screen and (max-width: 550px) {
     .popup__form-save-button {
         width: 238px;
+        margin: 16.26px 22px 25px;
     }
 }

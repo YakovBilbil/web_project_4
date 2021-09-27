@@ -1,5 +1,4 @@
 .profile__info {
-    height: 77px;
     display: grid;
     grid-template-columns: 373px 24px;
     grid-template-rows: 39px 22px;
@@ -21,7 +20,6 @@
     .profile__info {
         width: 100%;
         grid: none;
-        height: 136px;
         margin: auto;
         gap: 0px;
     }

@@ -1,9 +1,13 @@
 .profile__value_type_name {
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
     color: #FFFFFF;
     font-weight: 500;
     font-size: 42px;
-    line-height: 1.14;
-    margin: 0px 0px -8px;
+    line-height: 0.85;
+    margin: 0px;
     grid-column: 1;
     grid-row: 1;
 }
