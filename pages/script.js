@@ -1,6 +1,6 @@
-let profileName = document.querySelector(".profile__value_type_name");
+let profileName = document.querySelector(".profile__value-type-name");
 
-let profileProfession = document.querySelector(".profile__value_type_profession");
+let profileProfession = document.querySelector(".profile__value-type-profession");
 
 let editButton = document.querySelector(".profile__edit-button");
 

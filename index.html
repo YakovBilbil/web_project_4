@@ -19,9 +19,15 @@
                 <section class="profile">
                     <img class="profile__avatar" src="./images/avatar.png" alt="Profile Picture" />
                     <div class="profile__info">
-                        <h1 class="profile__value_type_name">Jacques Cousteau</h1>
-                        <p class="profile__value_type_profession">Explorer</p>
-                        <button type="button" class="profile__edit-button" aria-label="Edit Profile"><img class="edit-button-image" src="images/edit-button.png" alt="Edit Button" /></button>
+                        <h1 class="profile__value-type-name">Jacques Cousteau</h1>
+                        <p class="profile__value-type-profession">Explorer</p>
+                        <button type="button" class="profile__edit-button" aria-label="Edit Profile">
+                <img
+                  class="edit-button-image"
+                  src="images/edit-button.png"
+                  alt="Edit Button"
+                />
+              </button>
                     </div>
                     <button type="button" class="profile__add-button">&#43;</button>
                 </section>
@@ -79,10 +85,8 @@
             </footer>
         </div>
         <div class="popup">
-
             <div class="popup__form">
                 <form class="popup__form-submit" name="profileForm">
-
                     <h2 class="popup__form-title">Edit profile</h2>
 
                     <input type="text" name="full-name" placeholder="Name" class="popup__form-input popup__form-input_type_name" required />
@@ -92,9 +96,12 @@
                     <button type="submit" class="popup__form-save-button">Save</button>
 
                     <button type="button" class="popup__form-close-button" aria-label="Close">
-                      <img class="popup__close-icon" src="./images/close-icon.svg" alt="Close Icon" />
-                    </button>
-
+              <img
+                class="popup__close-icon"
+                src="./images/close-icon.svg"
+                alt="Close Icon"
+              />
+            </button>
                 </form>
             </div>
         </div>

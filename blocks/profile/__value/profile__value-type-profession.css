@@ -1,4 +1,4 @@
-.profile__value_type_profession {
+.profile__value-type-profession {
     -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -14,13 +14,13 @@
 }
 
 @media screen and (max-width: 900px) {
-    .profile__value_type_profession {
+    .profile__value-type-profession {
         font-size: 14px;
     }
 }
 
 @media screen and (max-width: 550px) {
-    .profile__value_type_profession {
+    .profile__value-type-profession {
         margin-bottom: 36px;
         text-align: center;
     }

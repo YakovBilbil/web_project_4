@@ -1,4 +1,4 @@
-.profile__value_type_name {
+.profile__value-type-name {
     -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -13,13 +13,13 @@
 }
 
 @media screen and (max-width: 900px) {
-    .profile__value_type_name {
+    .profile__value-type-name {
         font-size: 30px;
     }
 }
 
 @media screen and (max-width: 550px) {
-    .profile__value_type_name {
+    .profile__value-type-name {
         font-size: 22px;
         margin: 26.25px 0px 14px;
         text-align: center;
