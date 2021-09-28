@@ -8,8 +8,8 @@
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
 @import url(../blocks/profile/__info/profile__info.css);
-@import url(../blocks/profile/__value/profile__value-type-name.css);
-@import url(../blocks/profile/__value/profile__value-type-profession.css);
+@import url(../blocks/profile/__value-type-name/profile__value-type-name.css);
+@import url(../blocks/profile/__value-type-profession/profile__value-type-profession.css);
 @import url(../blocks/profile/__edit-button/profile__edit-button.css);
 @import url(../blocks/edit-button-image/edit-button-image.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
