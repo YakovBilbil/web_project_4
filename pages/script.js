@@ -53,29 +53,3 @@ editButton.addEventListener("click", openPopup);
 closeButton.addEventListener("click", closePopup);
 
 popupFormSubmit.addEventListener("submit", save);
-
-
-
-
-
-//function like(event) {
-//    event.target.classList.add("card__heart_active");
-//}
-//
-//function unlike(event) {
-//    event.target.classList.remove("card__heart_active");
-//}
-//
-//function check(el) {
-//    if (el.target.classList.contains("card__heart_active")) {
-//        el.target.classList.remove("card__heart_active");
-//    } else {
-//        el.target.classList.add("card__heart_active");
-//    }
-//}
-//
-//heart.forEach((el) => {
-//    el.addEventListener("click", (el) => {
-//        check(el);
-//    });
-//});
