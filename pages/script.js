@@ -146,7 +146,7 @@ function createCard(cardData) { // cardData = {name, link}
 
     cardPicture.addEventListener("click", () => {
         popupCardImage.querySelector(".popup__image-title").textContent = cardData.name;
-        popupCardImage.querySelector(".popup__image").style.backgroundImage = cardData.link;
+        popupCardImage.querySelector(".popup__image-photo").src = cardData.link;
         togglePopup(popupCardImage);
     });
 
@@ -213,60 +213,3 @@ const initialCards = [{
 initialCards.forEach(initialCardData => {
     cardsList.prepend(createCard(initialCardData));
 });
-
-
-
-/////////////////////////////
-/////// Image Popup /////////
-////////////////////////////
-
-//const allCardPictures = querySelectorAll(".");
-
-
-
-
-/*
-allCardPictures.addEventListener("click", () => {
-    popupCardImage.querySelector(".popup__image-title").textContent = cardData.name;
-    popupCardImage.querySelector(".popup__image").style.backgroundImage = cardData.link;
-    togglePopup(popupCardImage);
-});
-*/
-
-/*
-allCardPictures.forEach((el) => {
-    el.addEventListener("click", () => {
-        console.log("popup");
-        popupCardImage.querySelector(".popup__image-title").textContent = cardData.name;
-        popupCardImage.querySelector(".popup__image").style.backgroundImage = cardData.link;
-        togglePopup(popupCardImage);
-    });
-});
-*/
-
-/*
-allCardPictures.forEach(btn => btn.addEventListener("click", (event) => {
-    event.querySelector(".popup__image-title").textContent = cardData.name;
-    event.querySelector(".popup__image").style.backgroundImage = cardData.link;
-    togglePopup(popupCardImage);
-}));
-*/
-
-
-/*
-      cardHeart.forEach((el) => {
-          el.addEventListener("click", (event) => {
-              event.target.classList.toggle("card__heart_active");
-          });
-      });
-
-      */
-
-
-/*
-      cardPicture.addEventListener("click", () => {
-          popupCardImage.querySelector(".popup__title").textContent = cardData.name;
-          popupCardImage.querySelector(".popup__image").src = cardData.link;
-          togglePopup(popupCardImage);
-      });
-   */
