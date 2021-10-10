@@ -2,32 +2,28 @@
 //////////// Edit Profile Popup //////
 /////////////////////////////////////
 
-let allPopups = document.querySelectorAll(".popup");
+const allPopups = document.querySelectorAll(".popup");
 
-let popupEditProfile = document.querySelector(".popup_edit-profile");
+const popupEditProfile = document.querySelector(".popup_edit-profile");
 
-let popupInputName = document.querySelector(".popup__form-input_type_name");
+const popupInputName = document.querySelector(".popup__form-input_type_name");
 
-let profileName = document.querySelector(".profile__value-type-name");
+const profileName = document.querySelector(".profile__value-type-name");
 
-let popupInputProfession = document.querySelector(".popup__form-input_type_profession");
+const popupInputProfession = document.querySelector(".popup__form-input_type_profession");
 
-let profileProfession = document.querySelector(".profile__value-type-profession");
+const profileProfession = document.querySelector(".profile__value-type-profession");
 
-let editButton = document.querySelector(".profile__edit-button");
+const editButton = document.querySelector(".profile__edit-button");
 
-let allCloseButtons = document.querySelectorAll(".popup__form-close-button");
+const allCloseButtons = document.querySelectorAll(".popup__form-close-button");
 
-let popupFormSubmit = document.querySelector(".popup__form-submit");
+const popupFormSubmit = document.querySelector(".popup__form-submit");
 
 
 
 function togglePopup(popupType) {
     popupType.classList.toggle("popup_opened");
-    if (popupEditProfile.classList.contains("popup_opened")) {
-        popupInputName.value = profileName.textContent;
-        popupInputProfession.value = profileProfession.textContent;
-    }
 }
 
 
@@ -40,15 +36,23 @@ function save(event) {
 
 
 
-editButton.addEventListener("click", () => togglePopup(popupEditProfile));
+editButton.addEventListener("click", () => {
+    popupInputName.value = profileName.textContent;
+    popupInputProfession.value = profileProfession.textContent;
+    togglePopup(popupEditProfile);
+});
+
 
 allCloseButtons.forEach(btn => btn.addEventListener("click", () => {
-    allPopups.forEach(popup => popup.classList.remove("popup_opened"));
+    allPopups.forEach(popup => {
+        if (popup.classList.contains("popup_opened")) {
+            togglePopup(popup);
+        }
+    });
 }));
 
+
 popupFormSubmit.addEventListener("submit", save);
-
-
 
 
 
@@ -57,62 +61,40 @@ popupFormSubmit.addEventListener("submit", save);
 /////////////////////////////////////
 
 
-let popupAddCard = document.querySelector(".popup_add-card");
+const popupAddCard = document.querySelector(".popup_add-card");
 
-let addButton = document.querySelector(".profile__add-button");
+const addButton = document.querySelector(".profile__add-button");
 
-let addCardName = document.querySelector(".popup__form-input_type_title");
+const addCardName = document.querySelector(".popup__form-input_type_title");
 
-let addCardLink = document.querySelector(".popup__form-input_type_image-link");
+const addCardLink = document.querySelector(".popup__form-input_type_image-link");
 
-let cardsList = document.querySelector(".cards__list");
+const cardsList = document.querySelector(".cards__list");
 
-let popupCardImage = document.querySelector(".popup_card-image");
+const popupCardImage = document.querySelector(".popup_card-image");
+
+const cardTemplate = document.querySelector(".card-template").content.querySelector(".card");
+
 
 
 addButton.addEventListener("click", () => togglePopup(popupAddCard));
 
 
 
-
 function createCard(cardData) { // cardData = {name, link}
 
 
-    const card = document.createElement("li");
+    const card = cardTemplate.cloneNode(true);
 
-    card.className += "card";
+    const deleteButton = card.querySelector("card__delete");
 
-    cardsList.append(card);
+    const cardPicture = card.querySelector("card__picture");
 
-    const deleteButton = document.createElement("button");
+    const cardNameHeart = card.querySelector("card__name-heart");
 
-    deleteButton.className += "card__delete";
+    const cardName = card.querySelector("card__name");
 
-    card.append(deleteButton);
-
-    const cardPicture = document.createElement("img");
-
-    cardPicture.className += "card__picture";
-
-    card.append(cardPicture);
-
-    const cardNameHeart = document.createElement("div");
-
-    cardNameHeart.className += "card__name-heart";
-
-    card.append(cardNameHeart);
-
-    const cardName = document.createElement("h2");
-
-    cardName.className += "card__name";
-
-    cardNameHeart.append(cardName);
-
-    const cardHeart = document.createElement("button");
-
-    cardHeart.className += "card__heart";
-
-    cardNameHeart.append(cardHeart);
+    const cardHeart = card.querySelector("card__heart");
 
 
     cardName.textContent = cardData.name;
@@ -169,6 +151,8 @@ function createNewCard(event) {
         link: addCardLink.value
     };
     cardsList.prepend(createCard(newCard));
+    addCardName.value = "";
+    addCardLink.value = "";
     togglePopup(popupAddCard);
 }
 
