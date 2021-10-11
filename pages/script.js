@@ -73,7 +73,7 @@ const cardsList = document.querySelector(".cards__list");
 
 const popupCardImage = document.querySelector(".popup_card-image");
 
-const cardTemplate = document.querySelector(".card-template").content.querySelector(".card");
+const cardTemplate = document.querySelector("#card-template").content;
 
 
 
@@ -83,18 +83,17 @@ addButton.addEventListener("click", () => togglePopup(popupAddCard));
 
 function createCard(cardData) { // cardData = {name, link}
 
+    const card = cardTemplate.querySelector(".card").cloneNode(true);
 
-    const card = cardTemplate.cloneNode(true);
+    const deleteButton = card.querySelector(".card__delete");
 
-    const deleteButton = card.querySelector("card__delete");
+    const cardPicture = card.querySelector(".card__picture");
 
-    const cardPicture = card.querySelector("card__picture");
+    const cardNameHeart = card.querySelector(".card__name-heart");
 
-    const cardNameHeart = card.querySelector("card__name-heart");
+    const cardName = card.querySelector(".card__name");
 
-    const cardName = card.querySelector("card__name");
-
-    const cardHeart = card.querySelector("card__heart");
+    const cardHeart = card.querySelector(".card__heart");
 
 
     cardName.textContent = cardData.name;
@@ -196,4 +195,5 @@ const initialCards = [{
 
 initialCards.forEach(initialCardData => {
     cardsList.prepend(createCard(initialCardData));
+
 });
