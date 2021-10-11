@@ -73,7 +73,7 @@ const cardsList = document.querySelector(".cards__list");
 
 const popupCardImage = document.querySelector(".popup_card-image");
 
-const cardTemplate = document.querySelector("#card-template").content;
+const cardTemplate = document.querySelector(".card-template").content;
 
 
 
@@ -88,8 +88,6 @@ function createCard(cardData) { // cardData = {name, link}
     const deleteButton = card.querySelector(".card__delete");
 
     const cardPicture = card.querySelector(".card__picture");
-
-    const cardNameHeart = card.querySelector(".card__name-heart");
 
     const cardName = card.querySelector(".card__name");
 
