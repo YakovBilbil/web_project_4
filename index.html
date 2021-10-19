@@ -45,12 +45,16 @@
 
         <div class="popup popup_edit-profile">
             <div class="popup__form">
-                <form class="popup__form-submit" name="profileForm">
+                <form class="popup__form-submit" name="profileForm" novalidate>
                     <h2 class="popup__form-title">Edit profile</h2>
 
-                    <input type="text" name="full-name" placeholder="Name" class="popup__form-input popup__form-input_type_name" required />
+                    <input type="text" name="full-name" id="name-input" placeholder="Name" class="popup__form-input popup__form-input_type_name" minlength="2" maxlength="40" required />
 
-                    <input type="text" name="profession" placeholder="About me" class="popup__form-input popup__form-input_type_profession" required />
+                    <p class="popup__form-input-error" id="name-input-error"></p>
+
+                    <input type="text" name="profession" id="profession-input" placeholder="About me" class="popup__form-input popup__form-input_type_profession" minlength="2" maxlength="200" required />
+
+                    <p class="popup__form-input-error" id="profession-input-error"></p>
 
                     <button type="submit" class="popup__form-save-button">Save</button>
 
@@ -67,12 +71,16 @@
 
         <div class="popup popup_add-card">
             <div class="popup__form">
-                <form class="popup__form-submit" name="addCardForm">
+                <form class="popup__form-submit" name="addCardForm" novalidate>
                     <h2 class="popup__form-title">New place</h2>
 
-                    <input type="text" name="title" placeholder="Title" class="popup__form-input popup__form-input_type_title" required />
+                    <input type="text" name="title" id="title-input" placeholder="Title" class="popup__form-input popup__form-input_type_title" minlength="1" maxlength="30" required />
 
-                    <input type="text" name="imageLink" placeholder="Image link" class="popup__form-input popup__form-input_type_image-link" required />
+                    <p class="popup__form-input-error" id="title-input-error"></p>
+
+                    <input type="url" name="imageLink" id="url-input" placeholder="Image link" class="popup__form-input popup__form-input_type_image-link" required />
+
+                    <p class="popup__form-input-error" id="url-input-error"></p>
 
                     <button type="submit" class="popup__form-save-button">Create</button>
 
@@ -115,6 +123,7 @@
     </template>
 
     <script src="./pages/script.js"></script>
+    <script src="./pages/validate.js"></script>
 
 </body>
 

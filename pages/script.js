@@ -195,3 +195,22 @@ initialCards.forEach(initialCardData => {
     cardsList.prepend(createCard(initialCardData));
 
 });
+
+
+//////////////////////////////////////
+/////////////// Key Handler///////////
+//////////////////////////////////////
+
+
+allPopups.forEach((popup) => {
+    document.addEventListener("keydown", (event) => {
+        if ((event.key === "Escape") && (popup.classList.contains("popup_opened"))) {
+            togglePopup(popup);
+        }
+    });
+    document.addEventListener("mousedown", (event) => {
+        if ((event.target.classList.contains("popup")) && (popup.classList.contains("popup_opened"))) {
+            togglePopup(popup);
+        }
+    });
+});
