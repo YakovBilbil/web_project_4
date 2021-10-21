@@ -2,24 +2,27 @@
 //////////// Edit Profile Popup //////
 /////////////////////////////////////
 
-const allPopups = document.querySelectorAll(".popup");
-
-const popupEditProfile = document.querySelector(".popup_edit-profile");
-
-const popupInputName = document.querySelector(".popup__form-input_type_name");
-
-const profileName = document.querySelector(".profile__value-type-name");
-
-const popupInputProfession = document.querySelector(".popup__form-input_type_profession");
-
-const profileProfession = document.querySelector(".profile__value-type-profession");
-
-const editButton = document.querySelector(".profile__edit-button");
-
-const allCloseButtons = document.querySelectorAll(".popup__form-close-button");
-
-const popupFormSubmit = document.querySelector(".popup__form-submit");
-
+const [
+    allPopups,
+    popupEditProfile,
+    popupInputName,
+    profileName,
+    popupInputProfession,
+    profileProfession,
+    editButton,
+    allCloseButtons,
+    popupFormSubmit
+] = [
+    document.querySelectorAll(".popup"),
+    document.querySelector(".popup_edit-profile"),
+    document.querySelector(".popup__form-input_type_name"),
+    document.querySelector(".profile__value-type-name"),
+    document.querySelector(".popup__form-input_type_profession"),
+    document.querySelector(".profile__value-type-profession"),
+    document.querySelector(".profile__edit-button"),
+    document.querySelectorAll(".popup__form-close-button"),
+    document.querySelector(".popup__form-submit")
+];
 
 
 function togglePopup(popupType) {
@@ -27,7 +30,7 @@ function togglePopup(popupType) {
 }
 
 
-function save(event) {
+function submitEditProfilePopup(event) {
     event.preventDefault();
     profileName.textContent = popupInputName.value;
     profileProfession.textContent = popupInputProfession.value;
@@ -40,7 +43,10 @@ editButton.addEventListener("click", () => {
     popupInputName.value = profileName.textContent;
     popupInputProfession.value = profileProfession.textContent;
     togglePopup(popupEditProfile);
+    document.addEventListener("keydown", escHandler);
 });
+
+
 
 
 allCloseButtons.forEach(btn => btn.addEventListener("click", () => {
@@ -52,7 +58,7 @@ allCloseButtons.forEach(btn => btn.addEventListener("click", () => {
 }));
 
 
-popupFormSubmit.addEventListener("submit", save);
+popupFormSubmit.addEventListener("submit", submitEditProfilePopup);
 
 
 
@@ -60,43 +66,53 @@ popupFormSubmit.addEventListener("submit", save);
 //////////// Add Card Popup /////////////
 /////////////////////////////////////
 
+const [
+    popupAddCard,
+    addButton,
+    addCardName,
+    addCardLink,
+    cardsList,
+    popupCardImage,
+    cardTemplate
+] = [
+    document.querySelector(".popup_add-card"),
+    document.querySelector(".profile__add-button"),
+    document.querySelector(".popup__form-input_type_title"),
+    document.querySelector(".popup__form-input_type_image-link"),
+    document.querySelector(".cards__list"),
+    document.querySelector(".popup_card-image"),
+    document.querySelector(".card-template").content
+];
 
-const popupAddCard = document.querySelector(".popup_add-card");
 
-const addButton = document.querySelector(".profile__add-button");
-
-const addCardName = document.querySelector(".popup__form-input_type_title");
-
-const addCardLink = document.querySelector(".popup__form-input_type_image-link");
-
-const cardsList = document.querySelector(".cards__list");
-
-const popupCardImage = document.querySelector(".popup_card-image");
-
-const cardTemplate = document.querySelector(".card-template").content;
-
-
-
-addButton.addEventListener("click", () => togglePopup(popupAddCard));
-
+addButton.addEventListener("click", () => {
+    togglePopup(popupAddCard);
+    document.addEventListener("keydown", escHandler);
+});
 
 
 function createCard(cardData) { // cardData = {name, link}
 
     const card = cardTemplate.querySelector(".card").cloneNode(true);
 
-    const deleteButton = card.querySelector(".card__delete");
-
-    const cardPicture = card.querySelector(".card__picture");
-
-    const cardName = card.querySelector(".card__name");
-
-    const cardHeart = card.querySelector(".card__heart");
-
+    const [
+        deleteButton,
+        cardPicture,
+        cardName,
+        cardHeart
+    ] = [
+        card.querySelector(".card__delete"),
+        card.querySelector(".card__picture"),
+        card.querySelector(".card__name"),
+        card.querySelector(".card__heart")
+    ];
 
     cardName.textContent = cardData.name;
 
     cardPicture.src = cardData.link;
+
+    cardPicture.alt = `A picture of ${cardData.name}`;
+
 
 
     ///////////////////////////////
@@ -106,7 +122,6 @@ function createCard(cardData) { // cardData = {name, link}
     cardHeart.addEventListener("click", (event) => {
         event.target.classList.toggle("card__heart_active");
     });
-
 
 
     /////////////////////////////
@@ -126,7 +141,9 @@ function createCard(cardData) { // cardData = {name, link}
     cardPicture.addEventListener("click", () => {
         popupCardImage.querySelector(".popup__image-title").textContent = cardData.name;
         popupCardImage.querySelector(".popup__image-photo").src = cardData.link;
+        popupCardImage.querySelector(".popup__image-photo").alt = `A picture of ${cardData.name}`;
         togglePopup(popupCardImage);
+        document.addEventListener("keydown", escHandler);
     });
 
 
@@ -148,8 +165,7 @@ function createNewCard(event) {
         link: addCardLink.value
     };
     cardsList.prepend(createCard(newCard));
-    addCardName.value = "";
-    addCardLink.value = "";
+    popupAddCard.querySelector(".popup__form-submit").reset();
     togglePopup(popupAddCard);
 }
 
@@ -161,34 +177,6 @@ popupAddCard.addEventListener("submit", createNewCard);
 //////////////////////////////////////////
 //////////// six initial cards ///////////
 //////////////////////////////////////////
-
-const initialCards = [{
-        name: "Yosemite Valley",
-        link: "https://code.s3.yandex.net/web-code/yosemite.jpg"
-    },
-    {
-        name: "Lake Louise",
-        link: "https://code.s3.yandex.net/web-code/lake-louise.jpg"
-    },
-    {
-        name: "Bald Mountains",
-        link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg"
-    },
-    {
-        name: "Latemar",
-        link: "https://code.s3.yandex.net/web-code/latemar.jpg"
-    },
-    {
-        name: "Vanoise National Park",
-        link: "https://code.s3.yandex.net/web-code/vanoise.jpg"
-    },
-    {
-        name: "Lago di Braies",
-        link: "https://code.s3.yandex.net/web-code/lago.jpg"
-    }
-];
-
-
 
 
 initialCards.forEach(initialCardData => {
@@ -202,13 +190,18 @@ initialCards.forEach(initialCardData => {
 //////////////////////////////////////
 
 
-allPopups.forEach((popup) => {
-    document.addEventListener("keydown", (event) => {
+function escHandler(event) {
+    allPopups.forEach((popup) => {
         if ((event.key === "Escape") && (popup.classList.contains("popup_opened"))) {
             togglePopup(popup);
+            document.removeEventListener("keydown", escHandler);
         }
     });
-    document.addEventListener("mousedown", (event) => {
+}
+
+
+allPopups.forEach((popup) => {
+    popup.addEventListener("click", (event) => {
         if ((event.target.classList.contains("popup")) && (popup.classList.contains("popup_opened"))) {
             togglePopup(popup);
         }
