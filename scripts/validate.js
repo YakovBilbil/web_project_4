@@ -2,6 +2,15 @@
 //////// Validation////////////
 ////////////////////////////////
 
+const settingsConfig = {
+    formSelector: ".popup__form-submit",
+    inputSelector: ".popup__form-input",
+    submitButtonSelector: ".popup__form-save-button",
+    inactiveButtonClass: "popup__form-save-button_inactive",
+    inputErrorClass: "popup__form-input_type_error",
+    errorClass: "popup__form-input-error_active"
+};
+
 
 function showError(formElement, inputElement, errorMessage, inputErrorClass, errorClass) {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
@@ -70,11 +79,11 @@ function enableValidation(settingsObject) {
 }
 
 
-enableValidation({
-    formSelector: ".popup__form-submit",
-    inputSelector: ".popup__form-input",
-    submitButtonSelector: ".popup__form-save-button",
-    inactiveButtonClass: "popup__form-save-button_inactive",
-    inputErrorClass: "popup__form-input_type_error",
-    errorClass: "popup__form-input-error_active"
-});
+enableValidation(settingsConfig);
+
+
+function checkInitialFormValidity(formElement, settingsObject) {
+    const inputList = Array.from(formElement.querySelectorAll(settingsObject.inputSelector));
+    const buttonElement = formElement.querySelector(settingsObject.submitButtonSelector);
+    toggleButtonState(inputList, buttonElement, settingsObject.inactiveButtonClass);
+}

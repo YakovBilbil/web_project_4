@@ -42,6 +42,7 @@ function submitEditProfilePopup(event) {
 editButton.addEventListener("click", () => {
     popupInputName.value = profileName.textContent;
     popupInputProfession.value = profileProfession.textContent;
+    checkInitialFormValidity(popupEditProfile.querySelector(".popup__form-submit"), settingsConfig);
     togglePopup(popupEditProfile);
     document.addEventListener("keydown", escHandler);
 });
@@ -166,6 +167,7 @@ function createNewCard(event) {
     };
     cardsList.prepend(createCard(newCard));
     popupAddCard.querySelector(".popup__form-submit").reset();
+    checkInitialFormValidity(popupAddCard.querySelector(".popup__form-submit"), settingsConfig);
     togglePopup(popupAddCard);
 }
 
