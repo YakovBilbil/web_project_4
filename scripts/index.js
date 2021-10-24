@@ -25,8 +25,13 @@ const [
 ];
 
 
-function togglePopup(popupType) {
-    popupType.classList.toggle("popup_opened");
+
+function openPopup(popupType) {
+    popupType.classList.add("popup_opened");
+}
+
+function closePopup(popupType) {
+    popupType.classList.remove("popup_opened");
 }
 
 
@@ -34,7 +39,7 @@ function submitEditProfilePopup(event) {
     event.preventDefault();
     profileName.textContent = popupInputName.value;
     profileProfession.textContent = popupInputProfession.value;
-    togglePopup(popupEditProfile);
+    closePopup(popupEditProfile);
 }
 
 
@@ -43,20 +48,20 @@ editButton.addEventListener("click", () => {
     popupInputName.value = profileName.textContent;
     popupInputProfession.value = profileProfession.textContent;
     checkInitialFormValidity(popupEditProfile.querySelector(".popup__form-submit"), settingsConfig);
-    togglePopup(popupEditProfile);
+    openPopup(popupEditProfile);
     document.addEventListener("keydown", escHandler);
 });
 
 
 
-
-allCloseButtons.forEach(btn => btn.addEventListener("click", () => {
-    allPopups.forEach(popup => {
-        if (popup.classList.contains("popup_opened")) {
-            togglePopup(popup);
+allPopups.forEach(popup => {
+    popup.addEventListener("click", (evt) => {
+        if (evt.target.classList.contains("popup") || evt.target.classList.contains("popup__close-icon")) {
+            closePopup(popup);
         }
     });
-}));
+});
+
 
 
 popupFormSubmit.addEventListener("submit", submitEditProfilePopup);
@@ -74,6 +79,7 @@ const [
     addCardLink,
     cardsList,
     popupCardImage,
+    popupImagePhoto,
     cardTemplate
 ] = [
     document.querySelector(".popup_add-card"),
@@ -82,12 +88,15 @@ const [
     document.querySelector(".popup__form-input_type_image-link"),
     document.querySelector(".cards__list"),
     document.querySelector(".popup_card-image"),
+    document.querySelector(".popup__image-photo"),
     document.querySelector(".card-template").content
 ];
 
+const popupAddCardPopupFormSubmit = popupAddCard.querySelector(".popup__form-submit");
+
 
 addButton.addEventListener("click", () => {
-    togglePopup(popupAddCard);
+    openPopup(popupAddCard);
     document.addEventListener("keydown", escHandler);
 });
 
@@ -141,9 +150,9 @@ function createCard(cardData) { // cardData = {name, link}
 
     cardPicture.addEventListener("click", () => {
         popupCardImage.querySelector(".popup__image-title").textContent = cardData.name;
-        popupCardImage.querySelector(".popup__image-photo").src = cardData.link;
-        popupCardImage.querySelector(".popup__image-photo").alt = `A picture of ${cardData.name}`;
-        togglePopup(popupCardImage);
+        popupImagePhoto.src = cardData.link;
+        popupImagePhoto.alt = `A picture of ${cardData.name}`;
+        openPopup(popupCardImage);
         document.addEventListener("keydown", escHandler);
     });
 
@@ -166,9 +175,9 @@ function createNewCard(event) {
         link: addCardLink.value
     };
     cardsList.prepend(createCard(newCard));
-    popupAddCard.querySelector(".popup__form-submit").reset();
-    checkInitialFormValidity(popupAddCard.querySelector(".popup__form-submit"), settingsConfig);
-    togglePopup(popupAddCard);
+    popupAddCardPopupFormSubmit.reset();
+    checkInitialFormValidity(popupAddCardPopupFormSubmit, settingsConfig);
+    closePopup(popupAddCard);
 }
 
 
@@ -188,24 +197,15 @@ initialCards.forEach(initialCardData => {
 
 
 //////////////////////////////////////
-/////////////// Key Handler///////////
+/////////////// Esc Key Handler///////////
 //////////////////////////////////////
 
 
 function escHandler(event) {
     allPopups.forEach((popup) => {
         if ((event.key === "Escape") && (popup.classList.contains("popup_opened"))) {
-            togglePopup(popup);
+            closePopup(popup);
             document.removeEventListener("keydown", escHandler);
         }
     });
 }
-
-
-allPopups.forEach((popup) => {
-    popup.addEventListener("click", (event) => {
-        if ((event.target.classList.contains("popup")) && (popup.classList.contains("popup_opened"))) {
-            togglePopup(popup);
-        }
-    });
-});

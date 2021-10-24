@@ -85,5 +85,8 @@ enableValidation(settingsConfig);
 function checkInitialFormValidity(formElement, settingsObject) {
     const inputList = Array.from(formElement.querySelectorAll(settingsObject.inputSelector));
     const buttonElement = formElement.querySelector(settingsObject.submitButtonSelector);
+    inputList.forEach((inputElement) => {
+        checkInputValidity(formElement, inputElement, settingsObject.inputErrorClass, settingsObject.errorClass);
+    });
     toggleButtonState(inputList, buttonElement, settingsObject.inactiveButtonClass);
 }
