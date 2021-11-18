@@ -1,12 +1,8 @@
-import { openPopup, escHandler } from "./utils.js";
+import { openPopup } from "./utils.js";
 
-const [
-    popupCardImage,
-    popupImagePhoto
-] = [
-    document.querySelector(".popup_card-image"),
-    document.querySelector(".popup__image-photo")
-];
+
+const popupCardImage = document.querySelector(".popup_card-image");
+const popupImagePhoto = document.querySelector(".popup__image-photo");
 
 
 export default class Card {
@@ -18,24 +14,14 @@ export default class Card {
 
     _addEventListeners() {
 
-        const [
-            deleteButton,
-            cardPicture,
-            cardName,
-            cardHeart
-        ] = [
-            this._card.querySelector(".card__delete"),
-            this._card.querySelector(".card__picture"),
-            this._card.querySelector(".card__name"),
-            this._card.querySelector(".card__heart")
-        ];
+        const deleteButton = this._card.querySelector(".card__delete");
+        const cardPicture = this._card.querySelector(".card__picture");
+        const cardName = this._card.querySelector(".card__name");
+        const cardHeart = this._card.querySelector(".card__heart");
 
         cardName.textContent = this._name;
-
         cardPicture.src = this._link;
-
         cardPicture.alt = `A picture of ${this._name}`;
-
 
 
         ///////////////////////////////
@@ -66,18 +52,13 @@ export default class Card {
             popupImagePhoto.src = this._link;
             popupImagePhoto.alt = `A picture of ${this._name}`;
             openPopup(popupCardImage);
-            document.addEventListener("keydown", escHandler);
         });
 
     }
 
     render() {
-
         this._card = this._template.querySelector(".card").cloneNode(true);
-
         this._addEventListeners();
-
         return this._card;
-
     }
 }

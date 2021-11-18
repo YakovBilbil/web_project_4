@@ -1,29 +1,30 @@
-const [
-    allPopups,
-    addButton,
-    popupAddCard
-] = [
-    document.querySelectorAll(".popup"),
-    document.querySelector(".profile__add-button"),
-    document.querySelector(".popup_add-card")
-];
+const allPopups = document.querySelectorAll(".popup");
+const addButton = document.querySelector(".profile__add-button");
+const popupAddCard = document.querySelector(".popup_add-card");
 
-function openPopup(popupType) {
-    popupType.classList.add("popup_opened");
-}
 
 function closePopup(popupType) {
     popupType.classList.remove("popup_opened");
+    document.removeEventListener("keydown", escHandler);
 }
 
+
 function escHandler(event) {
-    allPopups.forEach((popup) => {
-        if ((event.key === "Escape") && (popup.classList.contains("popup_opened"))) {
-            closePopup(popup);
-            document.removeEventListener("keydown", escHandler);
-        }
-    });
+    if (event.key === "Escape") {
+        allPopups.forEach((popup) => {
+            if (popup.classList.contains("popup_opened")) {
+                closePopup(popup);
+            }
+        });
+    }
 }
+
+
+function openPopup(popupType) {
+    popupType.classList.add("popup_opened");
+    document.addEventListener("keydown", escHandler);
+}
+
 
 function clickHandler() {
     allPopups.forEach(popup => {
@@ -35,12 +36,12 @@ function clickHandler() {
     });
 }
 
+
 function addButtonHandler() {
     addButton.addEventListener("click", () => {
         openPopup(popupAddCard);
-        document.addEventListener("keydown", escHandler);
     });
 }
 
 
-export { openPopup, closePopup, escHandler, clickHandler, addButtonHandler };
+export { openPopup, closePopup, clickHandler, addButtonHandler };

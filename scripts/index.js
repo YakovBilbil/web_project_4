@@ -1,28 +1,31 @@
 import FormValidator from "./FormValidator.js";
 import Card from "./Card.js";
-import { openPopup, closePopup, escHandler, clickHandler, addButtonHandler } from "./utils.js";
+import { openPopup, closePopup, clickHandler, addButtonHandler } from "./utils.js";
 
 ///////////////////////////////////////
 //////////// Edit Profile Popup //////
 /////////////////////////////////////
 
-const [
-    popupEditProfile,
-    popupInputName,
-    profileName,
-    popupInputProfession,
-    profileProfession,
-    editButton,
-    popupFormSubmit
-] = [
-    document.querySelector(".popup_edit-profile"),
-    document.querySelector(".popup__form-input_type_name"),
-    document.querySelector(".profile__value-type-name"),
-    document.querySelector(".popup__form-input_type_profession"),
-    document.querySelector(".profile__value-type-profession"),
-    document.querySelector(".profile__edit-button"),
-    document.querySelector(".popup__form-submit")
-];
+
+const popupEditProfile = document.querySelector(".popup_edit-profile");
+const popupInputName = document.querySelector(".popup__form-input_type_name");
+const profileName = document.querySelector(".profile__value-type-name");
+const popupInputProfession = document.querySelector(".popup__form-input_type_profession");
+const profileProfession = document.querySelector(".profile__value-type-profession");
+const editButton = document.querySelector(".profile__edit-button");
+const popupFormSubmit = document.querySelector(".popup__form-submit");
+
+const settingsConfig = {
+    inputSelector: ".popup__form-input",
+    submitButtonSelector: ".popup__form-save-button",
+    inactiveButtonClass: "popup__form-save-button_inactive",
+    inputErrorClass: "popup__form-input_type_error",
+    errorClass: "popup__form-input-error_active"
+};
+
+const editProfileFormValidator = new FormValidator(settingsConfig, popupEditProfile.querySelector(".popup__form-submit"));
+
+editProfileFormValidator.enableValidation();
 
 
 function submitEditProfilePopup(event) {
@@ -36,11 +39,10 @@ function submitEditProfilePopup(event) {
 editButton.addEventListener("click", () => {
     popupInputName.value = profileName.textContent;
     popupInputProfession.value = profileProfession.textContent;
-    const formValidator = new FormValidator(settingsConfig, popupEditProfile.querySelector(".popup__form-submit"));
-    formValidator.checkInitialFormValidity();
+    editProfileFormValidator.checkInitialFormValidity();
     openPopup(popupEditProfile);
-    document.addEventListener("keydown", escHandler);
 });
+
 
 clickHandler();
 
@@ -51,24 +53,25 @@ popupFormSubmit.addEventListener("submit", submitEditProfilePopup);
 //////////// Add Card Popup /////////////
 /////////////////////////////////////
 
-const [
-    popupAddCard,
-    addCardName,
-    addCardLink,
-    cardsList,
-    cardTemplateSelector
-] = [
-    document.querySelector(".popup_add-card"),
-    document.querySelector(".popup__form-input_type_title"),
-    document.querySelector(".popup__form-input_type_image-link"),
-    document.querySelector(".cards__list"),
-    ".card-template"
-];
 
+const popupAddCard = document.querySelector(".popup_add-card");
+const addCardName = document.querySelector(".popup__form-input_type_title");
+const addCardLink = document.querySelector(".popup__form-input_type_image-link");
+const cardsList = document.querySelector(".cards__list");
+const cardTemplateSelector = ".card-template";
 const popupAddCardPopupFormSubmit = popupAddCard.querySelector(".popup__form-submit");
 
+const addCardFormValidator = new FormValidator(settingsConfig, popupAddCardPopupFormSubmit);
+
+addCardFormValidator.enableValidation();
 
 addButtonHandler();
+
+
+function createCardInstanceAndRender(cardData, cardTemplateSelector) {
+    const newCard = new Card(cardData, cardTemplateSelector);
+    cardsList.prepend(newCard.render());
+}
 
 
 function createNewCard(event) {
@@ -77,11 +80,9 @@ function createNewCard(event) {
         name: addCardName.value,
         link: addCardLink.value
     };
-    const newCard = new Card(cardData, cardTemplateSelector);
-    cardsList.prepend(newCard.render());
+    createCardInstanceAndRender(cardData, cardTemplateSelector);
     popupAddCardPopupFormSubmit.reset();
-    const formValidator = new FormValidator(settingsConfig, popupAddCardPopupFormSubmit);
-    formValidator.checkInitialFormValidity();
+    addCardFormValidator.checkInitialFormValidity();
     closePopup(popupAddCard);
 }
 
@@ -123,29 +124,5 @@ const initialCards = [{
 
 
 initialCards.forEach(initialCardData => {
-    const card = new Card(initialCardData, cardTemplateSelector);
-    cardsList.prepend(card.render());
-});
-
-
-/////////////////////////////
-//////// Validation ////////
-///////////////////////////
-
-const formSelector = ".popup__form-submit";
-
-const settingsConfig = {
-    inputSelector: ".popup__form-input",
-    submitButtonSelector: ".popup__form-save-button",
-    inactiveButtonClass: "popup__form-save-button_inactive",
-    inputErrorClass: "popup__form-input_type_error",
-    errorClass: "popup__form-input-error_active"
-};
-
-const formList = Array.from(document.querySelectorAll(formSelector));
-
-formList.forEach((formElement) => {
-    const formValidator = new FormValidator(settingsConfig, formElement);
-
-    formValidator.enableValidation();
+    createCardInstanceAndRender(initialCardData, cardTemplateSelector);
 });
