@@ -26,6 +26,12 @@
 
 - JavaScript
 
+- Webpack
+
+- Bable
+
+- OOP Developing Paradigm
+
 **The link to GitHub Pages**
 
 https://yakovbilbil.github.io/web_project_4/index.html
