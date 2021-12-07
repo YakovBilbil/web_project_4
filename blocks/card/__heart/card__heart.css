@@ -6,7 +6,7 @@
     -webkit-transition: opacity 0.2s linear 0.2s;
     -o-transition: opacity 0.2s linear 0.2s;
     transition: opacity 0.2s linear 0.2s;
-    background-image: url("../../../images/white-heart.png");
+    background-image: url("../../../src/images/white-heart.png");
     background-size: contain;
     background-repeat: no-repeat;
     border: none;

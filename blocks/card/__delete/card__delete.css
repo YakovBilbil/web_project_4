@@ -3,7 +3,7 @@
     -webkit-transition: opacity 0.2s linear 0.2s;
     -o-transition: opacity 0.2s linear 0.2s;
     transition: opacity 0.2s linear 0.2s;
-    background-image: url("../../../images/trash.png");
+    background-image: url("../../../src/images/trash.png");
     width: 18px;
     height: 19.3px;
     position: absolute;

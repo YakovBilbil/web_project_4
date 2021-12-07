@@ -1,15 +1,9 @@
-import { openPopup } from "./utils.js";
-
-
-const popupCardImage = document.querySelector(".popup_card-image");
-const popupImagePhoto = document.querySelector(".popup__image-photo");
-
-
 export default class Card {
-    constructor(cardData, cardTemplateSelector) {
+    constructor(cardData, cardTemplateSelector, handleCardClick) {
         this._name = cardData.name;
         this._link = cardData.link;
         this._template = document.querySelector(cardTemplateSelector).content;
+        this._handleCardClick = handleCardClick;
     }
 
     _addEventListeners() {
@@ -48,10 +42,7 @@ export default class Card {
         ////////////////////////////
 
         cardPicture.addEventListener("click", () => {
-            popupCardImage.querySelector(".popup__image-title").textContent = this._name;
-            popupImagePhoto.src = this._link;
-            popupImagePhoto.alt = `A picture of ${this._name}`;
-            openPopup(popupCardImage);
+            this._handleCardClick(this._link, this._name);
         });
 
     }
