@@ -23,7 +23,9 @@ const popupAddCardPopupFormSubmit = popupAddCard.querySelector(".popup__form-sub
 const addButton = document.querySelector(".profile__add-button");
 const popupCardImage = document.querySelector(".popup_card-image");
 
+const popupVerifyCardDelete = document.querySelector(".popup_verify-card-delete");
 
+/*
 const initialCards = [{
         name: "Yosemite Valley",
         link: "https://code.s3.yandex.net/web-code/yosemite.jpg"
@@ -49,6 +51,7 @@ const initialCards = [{
         link: "https://code.s3.yandex.net/web-code/lago.jpg"
     }
 ];
+*/
 
 
 
@@ -70,5 +73,5 @@ export {
     addButton,
     popupCardImage,
 
-    initialCards
+    popupVerifyCardDelete
 };
