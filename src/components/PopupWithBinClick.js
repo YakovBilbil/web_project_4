@@ -13,9 +13,9 @@ export default class PopupWithBinClick extends Popup {
         super.open();
         this._popup.addEventListener("submit", (evt) => {
             evt.preventDefault();
-            const res = this._deleteCardHandle(cardId);
-            console.log(res);
-            if (res) {
+            const resOk = this._deleteCardHandle(cardId);
+            console.log(resOk);
+            if (resOk) {
                 cardOnDome.remove();
                 this.close();
             }

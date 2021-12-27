@@ -87,7 +87,7 @@ export default class Api {
             });
 
             if (response.ok) {
-                return response.json();
+                return true;
             } else {
                 throw new Error(`something get wrong. Status: ${response.status}, ${response.statusText}`);
             }

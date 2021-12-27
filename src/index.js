@@ -43,12 +43,6 @@ import PopupWithBinClick from "./components/PopupWithBinClick.js";
 const api = new Api({
     baseUrl: "https://around.nomoreparties.co/v1/group-12",
     token: "eba68a1e-4841-45cc-961e-923f0a471f18"
-        /*
-        headers: {
-            authorization: "eba68a1e-4841-45cc-961e-923f0a471f18",
-            // "Content-Type": "application/json"
-        }
-        */
 });
 
 
@@ -62,13 +56,6 @@ editProfileFormValidator.enableValidation();
 
 const profileInfo = new UserInfo({ profileName, profileProfession });
 
-/*
-api.getUserData() // get user info from server
-    .then((userData) => {
-        profileInfo.setUserInfo({ popupInputName: userData.name, popupInputProfession: userData.about });
-    });
-
-    */
 
 const editProfilePopup = new PopupWithForm({
     popupSelector: popupEditProfile,
@@ -99,36 +86,20 @@ editButton.addEventListener("click", () => {
 //////////// Initial cards ///////////
 //////////////////////////////////////
 
+
 const imagePopup = new PopupWithImage(popupCardImage);
 imagePopup.setEventListeners();
 
 
-////////////////////////////////
-//// Delete Card Popup //////////
-///////////////////////////////
 
 const deleteCardPopup = new PopupWithBinClick(popupVerifyCardDelete, {
     deleteCardHandle: async(cardId) => {
-        await api.deleteCard(cardId);
+        const resOk = await api.deleteCard(cardId);
+        return resOk;
     }
 });
-/*   api.deleteCard
-handleFormSubmit: async(data) => {
-const profile = await api.editProfile(data.fullName, data.profession);
-if (profile) {
-    profileInfo.setUserInfo({ popupInputName: data.fullName, popupInputProfession: data.profession });
-}
-editProfilePopup.close();
-}
-});
-*/
-
-
-// When we build the delete method we'll have to check first if the owner ID is my ID, so I can delete because I can delete only my cards. and only than the trash symbol will appear
 
 deleteCardPopup.setEventListeners();
-
-
 
 
 
@@ -144,13 +115,6 @@ const listOfCards = new Section({
     }
 }, cardsList);
 
-/*
-api.
-getInitialCards()
-    .then((initialCards) => {
-        listOfCards.renderItems(initialCards);
-    });
-    */
 
 
 
@@ -202,19 +166,3 @@ async function init() {
 }
 
 const userId = init();
-
-
-
-
-
-/* To Do:
-
-   find why the userId is undefined by the Card class
-   with the Id verify to remove trash
-   then find out how to remove the specific card, maybe with its id it is wriiten in the site
-
-const userId = userData._id;
-זה צריך להיות מחוץ לפונקציה או שהפונקציה תחזיר אותו
-const x = init();
-ואז לשים אותו כאריומנט
-   */
