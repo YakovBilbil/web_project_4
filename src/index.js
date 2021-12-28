@@ -110,7 +110,22 @@ const renderAndAddNewCard = (newCard) => {
 
 const listOfCards = new Section({
     renderer: (item, userId) => {
-        const newCard = new Card(item, cardTemplateSelector, imagePopup.open, deleteCardPopup.open, userId);
+        const newCard = new Card({
+            cardData: item,
+            cardTemplateSelector,
+            handleCardClick: imagePopup.open,
+            handleCardDelete: deleteCardPopup.open,
+            userId,
+            handleLikePut: async(cardId) => {
+                console.log("card id in the index ", cardId);
+                const cardLikesData = await api.handleLikePut(cardId);
+                return cardLikesData;
+            },
+            handleLikeDelete: async(cardId) => {
+                const cardLikesData = await api.handleLikeDelete(cardId);
+                return cardLikesData;
+            }
+        });
         renderAndAddNewCard(newCard);
     }
 }, cardsList);
@@ -134,7 +149,22 @@ const addCardPopup = new PopupWithForm({
         if (card) {
             const actualCardsDataFromServer = await api.getInitialCards();
             const cardId = actualCardsDataFromServer[0]._id;
-            const newCard = new Card(data, cardTemplateSelector, imagePopup.open, deleteCardPopup.open, userId, cardId);
+            const newCard = new Card({
+                cardData: data,
+                cardTemplateSelector,
+                handleCardClick: imagePopup.open,
+                handleCardDelete: deleteCardPopup.open,
+                userId,
+                cardId,
+                handleLikePut: async(cardId) => {
+                    const cardLikesData = await api.handleLikePut(cardId);
+                    return cardLikesData;
+                },
+                handleLikeDelete: async(cardId) => {
+                    const cardLikesData = await api.handleLikeDelete(cardId);
+                    return cardLikesData;
+                }
+            });
             renderAndAddNewCard(newCard);
         }
         addCardPopup.close();

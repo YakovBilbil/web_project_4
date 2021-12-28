@@ -115,22 +115,41 @@ export default class Api {
         }
     }
 
-    /*
-        async getCardsData() {
-            try {
-                const response = await fetch(`${this._baseUrl}/cards`, {
-                    method: "GET",
-                    headers: { authorization: this._token }
-                });
 
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error(`something get wrong. Status: ${response.status}, ${response.statusText}`);
-                }
-            } catch (error) {
-                console.log("CAUGHT ERROR", error);
+    async handleLikePut(cardId) {
+        try {
+            const response = await fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+                method: "PUT",
+                headers: { authorization: this._token, "Content-Type": "application/json" },
+            });
+
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error(`something get wrong. Status: ${response.status}, ${response.statusText}`);
             }
+        } catch (error) {
+            console.log("CAUGHT ERROR", error);
         }
-        */
+    }
+
+
+    async handleLikeDelete(cardId) {
+        try {
+            const response = await fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+                method: "DELETE",
+                headers: { authorization: this._token, "Content-Type": "application/json" },
+            });
+
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error(`something get wrong. Status: ${response.status}, ${response.statusText}`);
+            }
+        } catch (error) {
+            console.log("CAUGHT ERROR", error);
+        }
+    }
+
+
 }

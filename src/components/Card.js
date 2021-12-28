@@ -1,20 +1,12 @@
 export default class Card {
-    constructor(cardData, cardTemplateSelector, handleCardClick, handleCardDelete, userId, cardId) {
+    constructor({ cardData, cardTemplateSelector, handleCardClick, handleCardDelete, userId, cardId, handleLikePut, handleLikeDelete }) {
         this._name = cardData.name;
         this._link = cardData.link;
         this._userId = userId;
-        /*
-קודם כל ברגע שהשגנו את הדאטא העדכנית מהשרת של כל הכרטיסים אז אולי כדאי למצוא דרך
-טובה יותר למצוא את מספר הלייקים של הכרטיס החדש וגם את האיי די של האוונר שלו בלי כל האיפים
-
-דבר שני ויותר חשוב זה למצוא את האיי די של הקארד החדש שנוצר. אולי למצוא את האיבר האחרון שנוצר
-אולי הוא הראשון או האחרון צריך לראות מה קרוה כשיוצרים כרטיס חדש
-איפה הוא ממוקם במערך
-
-*/
+        this._cardData = cardData;
 
 
-        if (cardData._id === undefined) { //ךמצוא איבר אחרון או ראשון) {
+        if (cardData._id === undefined) {
             this._cardId = cardId;
         } else {
             this._cardId = cardData._id;
@@ -47,13 +39,30 @@ export default class Card {
 
         this._handleCardDelete = handleCardDelete;
         //this._ownerID = cardData.owner._id;
+        this._handleLikePut = handleLikePut;
+        this._handleLikeDelete = handleLikeDelete;
     }
 
     _addEventListeners() {
 
         // Like Unlike
         this._cardHeart.addEventListener("click", (event) => {
-            event.target.classList.toggle("card__heart_active");
+            if (!event.target.classList.contains("card__heart_active")) {
+                console.log("card id in the class ", this._cardId);
+                this._handleLikePut(this._cardId);
+                if (this._handleLikePut()) {
+                    event.target.classList.toggle("card__heart_active");
+                    this._likesAmount = this._cardData.likes.length;
+                    this._cardLikesAmount.textContent = this._likesAmount;
+                }
+            } else {
+                this._handleLikeDelete(this._cardId);
+                if (this._handleLikeDelete()) {
+                    event.target.classList.toggle("card__heart_active");
+                    this._likesAmount = this._cardData.likes.length;
+                    this._cardLikesAmount.textContent = this._likesAmount;
+                }
+            }
         });
 
         // Delete Card
