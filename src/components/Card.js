@@ -74,18 +74,20 @@ export default class Card {
         this._cardHeart.addEventListener("click", async(event) => {
             if (!event.target.classList.contains("card__heart_active")) {
                 const cardData = await this._handleLikePut(this._cardId);
-                //if (likesAmount) {צריך למצוא דרך לבדוק כאן אולי בגוגל או בשיעורים קודמים
-                event.target.classList.toggle("card__heart_active");
-                console.log("Like added by you to card: ", this._cardId);
-                this._likesAmount = cardData.likes.length;
-                this._cardLikesAmount.textContent = this._likesAmount;
+                if (cardData) {
+                    event.target.classList.toggle("card__heart_active");
+                    console.log("Like added by you to card: ", this._cardId);
+                    this._likesAmount = cardData.likes.length;
+                    this._cardLikesAmount.textContent = this._likesAmount;
+                }
             } else {
                 const cardData = await this._handleLikeDelete(this._cardId);
-                //if (resOk)
-                event.target.classList.toggle("card__heart_active");
-                console.log("Like deleted by you from card: ", this._cardId);
-                this._likesAmount = cardData.likes.length;
-                this._cardLikesAmount.textContent = this._likesAmount;
+                if (cardData) {
+                    event.target.classList.toggle("card__heart_active");
+                    console.log("Like deleted by you from card: ", this._cardId);
+                    this._likesAmount = cardData.likes.length;
+                    this._cardLikesAmount.textContent = this._likesAmount;
+                }
             }
         });
 
