@@ -4,7 +4,7 @@ export default class PopupWithBinClick extends Popup {
     constructor(popupSelector, { deleteCardHandle }) {
         super(popupSelector);
         this.open = this.open.bind(this);
-        this._popupVerifyDeleteButton = this._popup.querySelector(".popup_verify-delete-button");
+        this._popupVerifyDeleteButton = this._popup.querySelector(".popup__verify-delete-button");
         this._deleteCardHandle = deleteCardHandle;
     }
 
@@ -22,6 +22,5 @@ export default class PopupWithBinClick extends Popup {
         super.open();
         this._cardId = cardId;
         this._cardOnDome = cardOnDome;
-        console.log("ready to delete ", cardId);
     }
 }
