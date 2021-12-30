@@ -157,6 +157,26 @@ export default class Api {
             const response = await fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
                 method: "DELETE",
                 headers: { authorization: this._token, "Content-Type": "application/json" },
+
+            });
+
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error(`something get wrong. Status: ${response.status}, ${response.statusText}`);
+            }
+        } catch (error) {
+            console.log("CAUGHT ERROR", error);
+        }
+    }
+
+
+    async changeProfilePicture(avatar) {
+        try {
+            const response = await fetch(`${this._baseUrl}/users/me/avatar`, {
+                method: "PATCH",
+                headers: { authorization: this._token, "Content-Type": "application/json" },
+                body: JSON.stringify({ avatar: avatar })
             });
 
             if (response.ok) {

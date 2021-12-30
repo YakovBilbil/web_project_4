@@ -36,6 +36,49 @@ import PopupWithBinClick from "./components/PopupWithBinClick.js";
 
 
 
+
+///////////////// edit avatar //////////////
+
+//const profileAvatar = (".profile__avatar");
+const profileEditAvatarButton = document.querySelector(".profile__edit-avatar-button");
+const profileEditAvatarButtonPencil = document.querySelector(".profile__edit-avatar-button-pencil");
+const popupEditAvatar = document.querySelector(".popup_edit-avatar");
+
+
+profileEditAvatarButton.addEventListener("mouseover", () => {
+    profileEditAvatarButtonPencil.classList.remove("not-visible");
+});
+
+profileEditAvatarButton.addEventListener("mouseout", () => {
+    profileEditAvatarButtonPencil.classList.add("not-visible");
+});
+
+
+
+
+const editAvatarFormValidator = new FormValidator(settingsConfig, popupEditAvatar.querySelector(".popup__form-submit"));
+editAvatarFormValidator.enableValidation();
+
+
+const editAvatarPopup = new PopupWithForm({
+    popupSelector: popupEditAvatar,
+    handleFormSubmit: async(data) => {
+        const updatedUserData = await api.changeProfilePicture(data.link);
+        if (updatedUserData) {
+            profileInfo.setUserAvatar({ popupInputAvatarLink: updatedUserData.avatar });
+        }
+        editAvatarPopup.close();
+    }
+});
+
+editAvatarPopup.setEventListeners();
+
+
+profileEditAvatarButtonPencil.addEventListener("click", () => {
+    editAvatarPopup.open();
+});
+
+
 ///////////////////////
 //////// API///////////
 //////////////////////
@@ -95,7 +138,7 @@ imagePopup.setEventListeners();
 const deleteCardPopup = new PopupWithBinClick(popupVerifyCardDelete, {
     deleteCardHandle: async(cardId, cardOnDome) => {
         const resOk = await api.deleteCard(cardId);
-        if (resOk.message === "This post has been deleted") { //see how can I check
+        if (resOk) {
             cardOnDome.remove();
             console.log(cardId, "was deleted ");
         }
@@ -204,6 +247,7 @@ async function init() {
     const userId = userData._id;
     listOfCards.renderItems(initialCards, userId);
     profileInfo.setUserInfo({ popupInputName: userData.name, popupInputProfession: userData.about });
+    profileInfo.setUserAvatar({ popupInputAvatarLink: userData.avatar });
     return userId;
 }
 

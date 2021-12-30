@@ -16,19 +16,24 @@
             </header>
             <main class="content">
                 <section class="profile">
-                    <img class="profile__avatar" src="<%=require('../src/images/avatar.png')%>" alt="Profile Picture" />
-                    <div class="profile__info">
-                        <h1 class="profile__value-type-name">Jacques Cousteau</h1>
-                        <p class="profile__value-type-profession">Explorer</p>
+                  <div class="profile__box-avatar">
+                      <img class="profile__avatar" src="<%=require('../src/images/hourglass.png')%>" alt="Profile Picture" />
+                      <button type="button" class="profile__edit-avatar-button">
+                        <img class="profile__edit-avatar-button-pencil not-visible" src="<%=require('../src/images/pencil.png')%>" alt="edit avatar button" />
+                      </button>
+                  </div>
+                  <div class="profile__info">
+                        <h1 class="profile__value-type-name">&#x231B</h1>
+                        <p class="profile__value-type-profession">&#x231B</p>
                         <button type="button" class="profile__edit-button" aria-label="Edit Profile">
-                <img
-                  class="profile__edit-icon"
-                  src="<%=require('../src/images/edit-button.png')%>"
-                  alt="Edit Button"
-                />
-              </button>
-                    </div>
-                    <button type="button" class="profile__add-button">&#43;</button>
+                          <img
+                          class="profile__edit-icon"
+                          src="<%=require('../src/images/edit-button.png')%>"
+                          alt="Edit Button"
+                          />
+                        </button>
+                  </div>
+                  <button type="button" class="profile__add-button">&#43;</button>
                 </section>
 
                 <section class="cards">
@@ -110,6 +115,27 @@
                 <form class="popup__form-submit">
                     <h2 class="popup__form-title">Are you sure?</h2>
                     <button type="submit" class="popup__form-save-button popup_verify-delete-button">Yes</button>
+                    <button type="button" class="popup__form-close-button" aria-label="Close">
+                       <img
+                        class="popup__close-icon"
+                        src="<%=require('../src/images/close-icon.svg')%>"/>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+
+        <div class="popup popup_edit-avatar">
+            <div class="popup__form">
+                <form class="popup__form-submit" name="addCardForm" novalidate>
+                    <h2 class="popup__form-title">Change profile picture</h2>
+
+                    <input type="url" name="link" id="url-input" placeholder="Profile picture link" class="popup__form-input popup__form-input_type_image-link" required />
+
+                    <p class="popup__form-input-error" id="url-input-error"></p>
+
+                    <button type="submit" class="popup__form-save-button">Save</button>
+
                     <button type="button" class="popup__form-close-button" aria-label="Close">
                        <img
                         class="popup__close-icon"

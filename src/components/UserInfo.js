@@ -2,6 +2,7 @@ export default class UserInfo {
     constructor({ profileName, profileProfession }) {
         this._profileName = profileName;
         this._profileProfession = profileProfession;
+        this._profileAvatar = document.querySelector(".profile__avatar");
     }
 
     getUserInfo() {
@@ -15,5 +16,9 @@ export default class UserInfo {
     setUserInfo({ popupInputName, popupInputProfession }) {
         this._profileName.textContent = popupInputName;
         this._profileProfession.textContent = popupInputProfession;
+    }
+
+    setUserAvatar({ popupInputAvatarLink }) {
+        this._profileAvatar.src = popupInputAvatarLink;
     }
 }
