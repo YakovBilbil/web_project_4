@@ -93,9 +93,12 @@ imagePopup.setEventListeners();
 
 
 const deleteCardPopup = new PopupWithBinClick(popupVerifyCardDelete, {
-    deleteCardHandle: async(cardId) => {
+    deleteCardHandle: async(cardId, cardOnDome) => {
         const resOk = await api.deleteCard(cardId);
-        return resOk;
+        if (resOk.message === "This post has been deleted") { //see how can I check
+            cardOnDome.remove();
+            console.log(cardId, "was deleted ");
+        }
     }
 });
 
@@ -116,14 +119,18 @@ const listOfCards = new Section({
             handleCardClick: imagePopup.open,
             handleCardDelete: deleteCardPopup.open,
             userId,
+            getCardLikesData: async(cardId) => {
+                const cardData = await api.getCardLikesData(cardId);
+                console.log(cardData);
+                return cardData;
+            },
             handleLikePut: async(cardId) => {
-                console.log("card id in the index ", cardId);
-                const cardLikesData = await api.handleLikePut(cardId);
-                return cardLikesData;
+                const cardData = await api.handleLikePut(cardId);
+                return cardData;
             },
             handleLikeDelete: async(cardId) => {
-                const cardLikesData = await api.handleLikeDelete(cardId);
-                return cardLikesData;
+                const cardData = await api.handleLikeDelete(cardId);
+                return cardData;
             }
         });
         renderAndAddNewCard(newCard);
@@ -156,16 +163,21 @@ const addCardPopup = new PopupWithForm({
                 handleCardDelete: deleteCardPopup.open,
                 userId,
                 cardId,
+                getCardLikesData: async(cardId) => {
+                    const cardData = await api.getCardLikesData(cardId);
+                    return cardData;
+                },
                 handleLikePut: async(cardId) => {
-                    const cardLikesData = await api.handleLikePut(cardId);
-                    return cardLikesData;
+                    const cardData = await api.handleLikePut(cardId);
+                    return cardData;
                 },
                 handleLikeDelete: async(cardId) => {
-                    const cardLikesData = await api.handleLikeDelete(cardId);
-                    return cardLikesData;
+                    const cardData = await api.handleLikeDelete(cardId);
+                    return cardData;
                 }
             });
             renderAndAddNewCard(newCard);
+            console.log("card number ", cardId, " was added");
         }
         addCardPopup.close();
     }

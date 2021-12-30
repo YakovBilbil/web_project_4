@@ -87,7 +87,7 @@ export default class Api {
             });
 
             if (response.ok) {
-                return true;
+                return response.json();
             } else {
                 throw new Error(`something get wrong. Status: ${response.status}, ${response.statusText}`);
             }
@@ -103,6 +103,24 @@ export default class Api {
                 method: "PATCH",
                 headers: { authorization: this._token, "Content-Type": "application/json" },
                 body: JSON.stringify({ name: name, about: about })
+            });
+
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error(`something get wrong. Status: ${response.status}, ${response.statusText}`);
+            }
+        } catch (error) {
+            console.log("CAUGHT ERROR", error);
+        }
+    }
+
+
+    async getCardLikesData(cardId) {
+        try {
+            const response = await fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+                method: "GET",
+                headers: { authorization: this._token }
             });
 
             if (response.ok) {
