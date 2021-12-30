@@ -20,8 +20,12 @@ import {
     addButton,
     popupCardImage,
 
-    popupVerifyCardDelete
-    //initialCards,
+    popupVerifyCardDelete,
+
+    // Edit Avatar Constants
+    profileEditAvatarButton,
+    profileEditAvatarButtonPencil,
+    popupEditAvatar
 } from "./utils/constants.js";
 
 import Api from "./utils/api.js";
@@ -36,14 +40,9 @@ import PopupWithBinClick from "./components/PopupWithBinClick.js";
 
 
 
-
+////////////////////////////////////////////
 ///////////////// edit avatar //////////////
-
-//const profileAvatar = (".profile__avatar");
-const profileEditAvatarButton = document.querySelector(".profile__edit-avatar-button");
-const profileEditAvatarButtonPencil = document.querySelector(".profile__edit-avatar-button-pencil");
-const popupEditAvatar = document.querySelector(".popup_edit-avatar");
-
+///////////////////////////////////////////
 
 profileEditAvatarButton.addEventListener("mouseover", () => {
     profileEditAvatarButtonPencil.classList.remove("not-visible");
@@ -52,7 +51,6 @@ profileEditAvatarButton.addEventListener("mouseover", () => {
 profileEditAvatarButton.addEventListener("mouseout", () => {
     profileEditAvatarButtonPencil.classList.add("not-visible");
 });
-
 
 
 
@@ -179,7 +177,6 @@ const listOfCards = new Section({
         renderAndAddNewCard(newCard);
     }
 }, cardsList);
-
 
 
 

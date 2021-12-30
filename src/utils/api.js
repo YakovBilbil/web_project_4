@@ -1,26 +1,9 @@
 export default class Api {
     constructor(options) {
-            this._baseUrl = options.baseUrl;
-            this._token = options.token;
-            console.log(`${this._baseUrl}`);
-        }
-        /*
-            getInitialCards() {
-                return fetch(`${this._baseUrl}/cards`, {
-                        headers: { authorization: this._token }
-                    })
-                    .then(res => {
-                        if (res.ok) {
-                            return res.json();
-                        } else {
-                            throw new Error(`something get wrong. Status: ${response.status}, ${response.statusText}`);
-                        }
-                    })
-                    .catch((error) => {
-                        console.log("CAUGHT ERROR", error);
-                    });
-            }
-            */
+        this._baseUrl = options.baseUrl;
+        this._token = options.token;
+        console.log(`${this._baseUrl}`);
+    }
 
 
     async getInitialCards() {

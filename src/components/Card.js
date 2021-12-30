@@ -5,15 +5,12 @@ export default class Card {
         this._userId = userId;
         this._cardData = cardData;
 
-        //ומה שאדוארד אמר
-        // וגם לעשות קונסול לוג להכל עם האיי די והאיי פי איי באותיות גדולות
 
         if (cardData._id === undefined) {
             this._cardId = cardId;
         } else {
             this._cardId = cardData._id;
         }
-
 
 
         if (cardData.owner === undefined) {
@@ -34,7 +31,6 @@ export default class Card {
         this._cardLikesAmount = this._card.querySelector(".card__likes-amount");
 
         this._handleCardDelete = handleCardDelete;
-        //this._ownerID = cardData.owner._id;
         this._getCardLikesData = getCardLikesData;
         this._handleLikePut = handleLikePut;
         this._handleLikeDelete = handleLikeDelete;
@@ -59,18 +55,6 @@ export default class Card {
 
 
     async _addEventListeners() {
-
-        // Like Unlike
-
-        //console.log(this._cardId);
-        //const cardLikesData = await this._getCardLikesData(this._cardId);
-        /*
-          if ((cardLikesData.likes !== undefined) && (cardLikesData.likes)) {} else {
-              this._likesAmount = cardData.likes.length;
-          }
-          */
-        //console.log(cardLikesData);
-
         this._cardHeart.addEventListener("click", async(event) => {
             if (!event.target.classList.contains("card__heart_active")) {
                 const cardData = await this._handleLikePut(this._cardId);
@@ -94,9 +78,6 @@ export default class Card {
         // Delete Card
         this._deleteButton.addEventListener("click", () => {
             this._handleCardDelete(this._cardId, this._card);
-            //console.log(this._cardDataOwnerId);
-            //this._card.remove();
-            //this._card = null;
         });
 
         // Image Popup
