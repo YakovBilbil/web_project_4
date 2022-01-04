@@ -40,12 +40,7 @@ export default class Card {
             this._likesAmount = 0;
         } else {
             this._likesAmount = cardData.likes.length;
-            let iLikedIt = false;
-            cardData.likes.forEach((like) => {
-                if (like._id === this._userId) {
-                    iLikedIt = true;
-                }
-            });
+            const iLikedIt = cardData.likes.some(like => like._id === this._userId);
             if (iLikedIt) {
                 this._cardHeart.classList.toggle("card__heart_active");
             }
@@ -60,7 +55,6 @@ export default class Card {
                 const cardData = await this._handleLikePut(this._cardId);
                 if (cardData) {
                     event.target.classList.toggle("card__heart_active");
-                    console.log("Like added by you to card: ", this._cardId);
                     this._likesAmount = cardData.likes.length;
                     this._cardLikesAmount.textContent = this._likesAmount;
                 }
@@ -68,7 +62,6 @@ export default class Card {
                 const cardData = await this._handleLikeDelete(this._cardId);
                 if (cardData) {
                     event.target.classList.toggle("card__heart_active");
-                    console.log("Like deleted by you from card: ", this._cardId);
                     this._likesAmount = cardData.likes.length;
                     this._cardLikesAmount.textContent = this._likesAmount;
                 }
@@ -77,7 +70,7 @@ export default class Card {
 
         // Delete Card
         this._deleteButton.addEventListener("click", () => {
-            this._handleCardDelete(this._cardId, this._card);
+            this._handleCardDelete({ cardId: this._cardId, cardOnDome: this._card });
         });
 
         // Image Popup

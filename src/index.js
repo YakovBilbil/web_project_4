@@ -28,7 +28,7 @@ import {
     popupEditAvatar
 } from "./utils/constants.js";
 
-import Api from "./utils/api.js";
+import Api from "./components/Api.js";
 import FormValidator from "./components/FormValidator.js";
 import Section from "./components/Section.js";
 import Card from "./components/Card.js";
@@ -36,7 +36,7 @@ import PopupWithForm from "./components/PopupWithForm.js";
 import UserInfo from "./components/UserInfo.js";
 import PopupWithImage from "./components/PopupWithImage.js";
 
-import PopupWithBinClick from "./components/PopupWithBinClick.js";
+import PopupWithIconClick from "./components/PopupWithIconClick.js";
 
 
 
@@ -53,7 +53,6 @@ profileEditAvatarButton.addEventListener("mouseout", () => {
 });
 
 
-
 const editAvatarFormValidator = new FormValidator(settingsConfig, popupEditAvatar.querySelector(".popup__form-submit"));
 editAvatarFormValidator.enableValidation();
 
@@ -61,11 +60,13 @@ editAvatarFormValidator.enableValidation();
 const editAvatarPopup = new PopupWithForm({
     popupSelector: popupEditAvatar,
     handleFormSubmit: async(data) => {
-        const updatedUserData = await api.changeProfilePicture(data.link);
-        if (updatedUserData) {
+        try {
+            const updatedUserData = await api.changeProfilePicture(data.link);
             profileInfo.setUserAvatar({ popupInputAvatarLink: updatedUserData.avatar });
+            editAvatarPopup.close();
+        } catch (error) {
+            console.log("CAUGHT ERROR", error);
         }
-        editAvatarPopup.close();
     }
 });
 
@@ -97,21 +98,20 @@ editProfileFormValidator.enableValidation();
 
 const profileInfo = new UserInfo({ profileName, profileProfession });
 
-
 const editProfilePopup = new PopupWithForm({
     popupSelector: popupEditProfile,
     handleFormSubmit: async(data) => {
-        const profile = await api.editProfile(data.fullName, data.profession);
-        if (profile) {
+        try {
+            await api.editProfile(data.fullName, data.profession);
             profileInfo.setUserInfo({ popupInputName: data.fullName, popupInputProfession: data.profession });
+            editProfilePopup.close();
+        } catch (error) {
+            console.log("CAUGHT ERROR", error);
         }
-        editProfilePopup.close();
     }
 });
 
-
 editProfilePopup.setEventListeners();
-
 
 editButton.addEventListener("click", () => {
     const userInfoToDisplayInForm = profileInfo.getUserInfo();
@@ -132,19 +132,19 @@ const imagePopup = new PopupWithImage(popupCardImage);
 imagePopup.setEventListeners();
 
 
-
-const deleteCardPopup = new PopupWithBinClick(popupVerifyCardDelete, {
-    deleteCardHandle: async(cardId, cardOnDome) => {
-        const resOk = await api.deleteCard(cardId);
-        if (resOk) {
+const deleteCardPopup = new PopupWithIconClick(popupVerifyCardDelete, {
+    handler: async({ cardId, cardOnDome }) => {
+        try {
+            await api.deleteCard(cardId);
             cardOnDome.remove();
-            console.log(cardId, "was deleted ");
+        } catch (error) {
+            console.log("CAUGHT ERROR", error);
         }
     }
 });
 
-deleteCardPopup.setEventListeners();
 
+deleteCardPopup.setEventListeners();
 
 
 const renderAndAddNewCard = (newCard) => {
@@ -161,17 +161,28 @@ const listOfCards = new Section({
             handleCardDelete: deleteCardPopup.open,
             userId,
             getCardLikesData: async(cardId) => {
-                const cardData = await api.getCardLikesData(cardId);
-                console.log(cardData);
-                return cardData;
+                try {
+                    const cardData = await api.getCardLikesData(cardId);
+                    return cardData;
+                } catch (error) {
+                    console.log("CAUGHT ERROR", error);
+                }
             },
             handleLikePut: async(cardId) => {
-                const cardData = await api.handleLikePut(cardId);
-                return cardData;
+                try {
+                    const cardData = await api.handleLikePut(cardId);
+                    return cardData;
+                } catch (error) {
+                    console.log("CAUGHT ERROR", error);
+                }
             },
             handleLikeDelete: async(cardId) => {
-                const cardData = await api.handleLikeDelete(cardId);
-                return cardData;
+                try {
+                    const cardData = await api.handleLikeDelete(cardId);
+                    return cardData;
+                } catch (error) {
+                    console.log("CAUGHT ERROR", error);
+                }
             }
         });
         renderAndAddNewCard(newCard);
@@ -192,34 +203,51 @@ addCardFormValidator.enableValidation();
 const addCardPopup = new PopupWithForm({
     popupSelector: popupAddCard,
     handleFormSubmit: async(data) => {
-        const card = await api.addCard(data.name, data.link);
-        if (card) {
-            const actualCardsDataFromServer = await api.getInitialCards();
-            const cardId = actualCardsDataFromServer[0]._id;
-            const newCard = new Card({
-                cardData: data,
-                cardTemplateSelector,
-                handleCardClick: imagePopup.open,
-                handleCardDelete: deleteCardPopup.open,
-                userId,
-                cardId,
-                getCardLikesData: async(cardId) => {
-                    const cardData = await api.getCardLikesData(cardId);
-                    return cardData;
-                },
-                handleLikePut: async(cardId) => {
-                    const cardData = await api.handleLikePut(cardId);
-                    return cardData;
-                },
-                handleLikeDelete: async(cardId) => {
-                    const cardData = await api.handleLikeDelete(cardId);
-                    return cardData;
-                }
-            });
-            renderAndAddNewCard(newCard);
-            console.log("card number ", cardId, " was added");
+        try {
+            await api.addCard(data.name, data.link);
+            try {
+                const actualCardsDataFromServer = await api.getInitialCards();
+                const cardId = actualCardsDataFromServer[0]._id;
+                const newCard = new Card({
+                    cardData: data,
+                    cardTemplateSelector,
+                    handleCardClick: imagePopup.open,
+                    handleCardDelete: deleteCardPopup.open,
+                    userId,
+                    cardId,
+                    getCardLikesData: async(cardId) => {
+                        try {
+                            const cardData = await api.getCardLikesData(cardId);
+                            return cardData;
+                        } catch (error) {
+                            console.log("CAUGHT ERROR", error);
+                        }
+                    },
+                    handleLikePut: async(cardId) => {
+                        try {
+                            const cardData = await api.handleLikePut(cardId);
+                            return cardData;
+                        } catch (error) {
+                            console.log("CAUGHT ERROR", error);
+                        }
+                    },
+                    handleLikeDelete: async(cardId) => {
+                        try {
+                            const cardData = await api.handleLikeDelete(cardId);
+                            return cardData;
+                        } catch (error) {
+                            console.log("CAUGHT ERROR", error);
+                        }
+                    }
+                });
+                renderAndAddNewCard(newCard);
+                addCardPopup.close();
+            } catch (error) {
+                console.log("CAUGHT ERROR", error);
+            }
+        } catch (error) {
+            console.log("CAUGHT ERROR", error);
         }
-        addCardPopup.close();
     }
 });
 
@@ -234,18 +262,22 @@ addButton.addEventListener("click", () => {
 
 
 async function init() {
-    const [initialCards,
-        userData,
-    ] = await Promise.all([
-        api.getInitialCards(),
-        api.getUserData()
-    ]);
+    try {
+        const [initialCards,
+            userData,
+        ] = await Promise.all([
+            api.getInitialCards(),
+            api.getUserData()
+        ]);
 
-    const userId = userData._id;
-    listOfCards.renderItems(initialCards, userId);
-    profileInfo.setUserInfo({ popupInputName: userData.name, popupInputProfession: userData.about });
-    profileInfo.setUserAvatar({ popupInputAvatarLink: userData.avatar });
-    return userId;
+        const userId = userData._id;
+        listOfCards.renderItems(initialCards, userId);
+        profileInfo.setUserInfo({ popupInputName: userData.name, popupInputProfession: userData.about });
+        profileInfo.setUserAvatar({ popupInputAvatarLink: userData.avatar });
+        return userId;
+    } catch (error) {
+        console.log("CAUGHT ERROR", error);
+    }
 }
 
 const userId = init();
