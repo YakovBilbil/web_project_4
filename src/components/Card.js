@@ -1,27 +1,19 @@
 export default class Card {
-    constructor({ cardData, cardTemplateSelector, getCardLikesData, handleCardClick, handleCardDelete, userId, cardId, handleLikePut, handleLikeDelete }) {
+    constructor({ cardData, cardTemplateSelector, getCardLikesData, handleCardClick, handleCardDelete, userId, handleLikePut, handleLikeDelete }) {
+        this._cardData = cardData;
+        this._template = document.querySelector(cardTemplateSelector).content;
+        this._getCardLikesData = getCardLikesData;
+        this._handleCardClick = handleCardClick;
+        this._handleCardDelete = handleCardDelete;
+        this._userId = userId;
+        this._handleLikePut = handleLikePut;
+        this._handleLikeDelete = handleLikeDelete;
+
         this._name = cardData.name;
         this._link = cardData.link;
-        this._userId = userId;
-        this._cardData = cardData;
-
-
-        if (cardData._id === undefined) {
-            this._cardId = cardId;
-        } else {
-            this._cardId = cardData._id;
-        }
-
-
-        if (cardData.owner === undefined) {
-            this._cardDataOwnerId = this._userId;
-        } else {
-            this._cardDataOwnerId = cardData.owner._id;
-        }
-
-
-        this._template = document.querySelector(cardTemplateSelector).content;
-        this._handleCardClick = handleCardClick;
+        this._cardId = cardData._id;
+        this._cardDataOwnerId = cardData.owner._id;
+        this._likesAmount = cardData.likes.length;
 
         this._card = this._template.querySelector(".card").cloneNode(true);
         this._deleteButton = this._card.querySelector(".card__delete");
@@ -30,23 +22,11 @@ export default class Card {
         this._cardHeart = this._card.querySelector(".card__heart");
         this._cardLikesAmount = this._card.querySelector(".card__likes-amount");
 
-        this._handleCardDelete = handleCardDelete;
-        this._getCardLikesData = getCardLikesData;
-        this._handleLikePut = handleLikePut;
-        this._handleLikeDelete = handleLikeDelete;
-
-
-        if (cardData.likes === undefined) {
-            this._likesAmount = 0;
-        } else {
-            this._likesAmount = cardData.likes.length;
-            const iLikedIt = cardData.likes.some(like => like._id === this._userId);
-            if (iLikedIt) {
-                this._cardHeart.classList.toggle("card__heart_active");
-            }
+        const iLikedIt = cardData.likes.some(like => like._id === this._userId);
+        if (iLikedIt) {
+            this._cardHeart.classList.toggle("card__heart_active");
         }
     }
-
 
 
     async _addEventListeners() {
@@ -88,7 +68,6 @@ export default class Card {
         if (this._cardDataOwnerId !== this._userId) {
             this._deleteButton.classList.add("not-visible");
         }
-
         this._addEventListeners();
         return this._card;
     }

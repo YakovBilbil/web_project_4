@@ -147,48 +147,50 @@ const deleteCardPopup = new PopupWithIconClick(popupVerifyCardDelete, {
 deleteCardPopup.setEventListeners();
 
 
-const renderAndAddNewCard = (newCard) => {
+const createCard = ({ cardData, userId }) => {
+    const newCard = new Card({
+        cardData,
+        cardTemplateSelector,
+        handleCardClick: imagePopup.open,
+        handleCardDelete: deleteCardPopup.open,
+        userId,
+        getCardLikesData: async(cardId) => {
+            try {
+                const cardData = await api.getCardLikesData(cardId);
+                return cardData;
+            } catch (error) {
+                console.log("CAUGHT ERROR", error);
+            }
+        },
+        handleLikePut: async(cardId) => {
+            try {
+                const cardData = await api.handleLikePut(cardId);
+                return cardData;
+            } catch (error) {
+                console.log("CAUGHT ERROR", error);
+            }
+        },
+        handleLikeDelete: async(cardId) => {
+            try {
+                const cardData = await api.handleLikeDelete(cardId);
+                return cardData;
+            } catch (error) {
+                console.log("CAUGHT ERROR", error);
+            }
+        }
+    });
+
     const newCardElement = newCard.render();
     listOfCards.addItem(newCardElement);
 };
 
-const listOfCards = new Section({
-    renderer: (item, userId) => {
-        const newCard = new Card({
-            cardData: item,
-            cardTemplateSelector,
-            handleCardClick: imagePopup.open,
-            handleCardDelete: deleteCardPopup.open,
-            userId,
-            getCardLikesData: async(cardId) => {
-                try {
-                    const cardData = await api.getCardLikesData(cardId);
-                    return cardData;
-                } catch (error) {
-                    console.log("CAUGHT ERROR", error);
-                }
-            },
-            handleLikePut: async(cardId) => {
-                try {
-                    const cardData = await api.handleLikePut(cardId);
-                    return cardData;
-                } catch (error) {
-                    console.log("CAUGHT ERROR", error);
-                }
-            },
-            handleLikeDelete: async(cardId) => {
-                try {
-                    const cardData = await api.handleLikeDelete(cardId);
-                    return cardData;
-                } catch (error) {
-                    console.log("CAUGHT ERROR", error);
-                }
-            }
-        });
-        renderAndAddNewCard(newCard);
-    }
-}, cardsList);
 
+const listOfCards =
+    new Section({
+        renderer: (item, userId) => {
+            createCard({ cardData: item, userId });
+        },
+    }, cardsList);
 
 
 
@@ -204,47 +206,9 @@ const addCardPopup = new PopupWithForm({
     popupSelector: popupAddCard,
     handleFormSubmit: async(data) => {
         try {
-            await api.addCard(data.name, data.link);
-            try {
-                const actualCardsDataFromServer = await api.getInitialCards();
-                const cardId = actualCardsDataFromServer[0]._id;
-                const newCard = new Card({
-                    cardData: data,
-                    cardTemplateSelector,
-                    handleCardClick: imagePopup.open,
-                    handleCardDelete: deleteCardPopup.open,
-                    userId,
-                    cardId,
-                    getCardLikesData: async(cardId) => {
-                        try {
-                            const cardData = await api.getCardLikesData(cardId);
-                            return cardData;
-                        } catch (error) {
-                            console.log("CAUGHT ERROR", error);
-                        }
-                    },
-                    handleLikePut: async(cardId) => {
-                        try {
-                            const cardData = await api.handleLikePut(cardId);
-                            return cardData;
-                        } catch (error) {
-                            console.log("CAUGHT ERROR", error);
-                        }
-                    },
-                    handleLikeDelete: async(cardId) => {
-                        try {
-                            const cardData = await api.handleLikeDelete(cardId);
-                            return cardData;
-                        } catch (error) {
-                            console.log("CAUGHT ERROR", error);
-                        }
-                    }
-                });
-                renderAndAddNewCard(newCard);
-                addCardPopup.close();
-            } catch (error) {
-                console.log("CAUGHT ERROR", error);
-            }
+            const newCardData = await api.addCard(data.name, data.link);
+            createCard({ cardData: newCardData, userId: newCardData.owner._id });
+            addCardPopup.close();
         } catch (error) {
             console.log("CAUGHT ERROR", error);
         }
