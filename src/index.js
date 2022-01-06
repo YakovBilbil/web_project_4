@@ -227,21 +227,20 @@ addButton.addEventListener("click", () => {
 
 async function init() {
     try {
+
         const [initialCards,
             userData,
         ] = await Promise.all([
             api.getInitialCards(),
             api.getUserData()
         ]);
-
         const userId = userData._id;
         listOfCards.renderItems(initialCards, userId);
         profileInfo.setUserInfo({ popupInputName: userData.name, popupInputProfession: userData.about });
         profileInfo.setUserAvatar({ popupInputAvatarLink: userData.avatar });
-        return userId;
     } catch (error) {
         console.log("CAUGHT ERROR", error);
     }
 }
 
-const userId = init();
+init();
